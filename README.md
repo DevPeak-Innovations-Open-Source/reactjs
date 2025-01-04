@@ -135,3 +135,27 @@ console.log(arr.sort((a, b)=>{
 
 
 ```
+
+
+### Recursive function
+- Calling of a function by itself but under a condition so it won't go under a infinite loop.
+
+### - For example
+
+```
+console.log(nestedMenu.map(rendernestedMenu));
+
+const rendernestedMenu = (item: any, index: number) => {
+
+    const rendersubitem = (item: any, index: number) => {
+      return rendernestedMenu(item, index);
+    }
+
+      console.log({
+         id: item.id,
+         name: item.name,
+         subArray: subitem?.map(rendersubitem)
+      })
+  }
+
+```
