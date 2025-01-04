@@ -143,19 +143,65 @@ console.log(arr.sort((a, b)=>{
 ### - For example
 
 ```
-console.log(nestedMenu.map(rendernestedMenu));
+const arr = [
+  {
+    "postId": 1,
+    "id": 1,
+    "name": "id labore ex et quam laborum",
+    "email": "Eliseo@gardner.biz",
+    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
+    "hide": false
+  },
+  {
+    "postId": 1,
+    "id": 2,
+    "name": "quo vero reiciendis velit similique earum",
+    "email": "Jayne_Kuhic@sydney.com",
+    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et",
+    "subarray": [
+      {
+        "postId": 1,
+        "id": 3,
+        "name": "odio adipisci rerum aut animi",
+        "email": "Nikita@garfield.biz",
+        "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
+        "subarray": [
+          {
+            "postId": 1,
+            "id": 3,
+            "name": "odio adipisci rerum aut animi",
+            "email": "Nikita@garfield.biz",
+            "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
+            "hide": false
+          },
+        ]
+      },
+    ]
+  },
+  {
+    "postId": 1,
+    "id": 3,
+    "name": "odio adipisci rerum aut animi",
+    "email": "Nikita@garfield.biz",
+    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
+    "hide": false
+  },
+]
 
-const rendernestedMenu = (item: any, index: number) => {
+const renderNested = (item, index) => {
 
-    const rendersubitem = (item: any, index: number) => {
-      return rendernestedMenu(item, index);
-    }
-
-      console.log({
-         id: item.id,
-         name: item.name,
-         subArray: subitem?.map(rendersubitem)
-      })
+  const renderSubArray = (subitem, subindex) => {
+    return renderNested(subitem, subindex)
   }
+
+  console.log({
+    ...item,
+    arr: item?.subarray?.map(renderSubArray)
+  });
+  
+}
+
+console.log(arr.map(renderNested));
+
 
 ```
