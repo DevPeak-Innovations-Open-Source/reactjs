@@ -84,3 +84,12 @@ console.log(arr.some((item, index)=> item.id > 3));
 
 
 ```
+
+### Array sort()
+
+```
+const str = ["Simran", "1,2,3", "Dhanur"]
+
+console.log(str.sort());
+
+```
