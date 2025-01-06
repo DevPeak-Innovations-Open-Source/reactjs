@@ -1,5 +1,13 @@
 # reactjs
 
+- ReactJS definition
+- CRA Template in ReactJS
+- package.json and it's use
+- difference between react code and build code
+- difference between import and require('')
+- how to change import method from require('') to import
+- difference between .js and .jsx
+
 ## Array method writing syntax
 ```
 "array variable name"."array method name"((item, index)=>{
