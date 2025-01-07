@@ -2,9 +2,11 @@
 
 ## React Hooks
 - useState()
-- UseEffect()
+- useEffect() 
+- Try using this API call 'https://dummyjson.com/products'
 ## Task for today
-- useMemo
+- useMemo()
+- useCallback()
 
 ## React Topics (Completed)
 - ReactJS definition
