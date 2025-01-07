@@ -1,5 +1,12 @@
 # reactjs
 
+## React Hooks
+- useState()
+- UseEffect()
+## Task for today
+- useMemo
+
+## React Topics (Completed)
 - ReactJS definition
 - CRA Template in ReactJS
 - package.json and it's use
