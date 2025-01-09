@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './Header';
+import { CardComponent } from './components';
 
 function App() {
 
@@ -17,22 +18,20 @@ function App() {
   }
 
   //runs only one time
-  useEffect(() => {
-    fetchData().then((res) => {
-      setData(res);
-    }).catch((err) => {
-      console.log(err);
-    })
-  },[number])
-
-  console.log(data);
+  useEffect(()=>{
+    fetchData();
+  },[number]);
   
 
-  return (
+  return ( 
     <div className="App">
       <Header />
-      {number}
-      <button onClick={()=> setnumber(number + 1)}>Click to reload api</button>
+      {data.map((value,index)=>{
+        console.log(value);
+        return <CardComponent title={value.title} body={value.body}/>
+      })}
+      {/* {number} */}
+       <button onClick={()=> setnumber(number + 1)}>Click to reload api</button> 
     </div>
   );
 }
