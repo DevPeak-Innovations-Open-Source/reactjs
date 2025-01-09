@@ -1,37 +1,41 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import Header from './Header';
-import { CardComponent } from './components';
+import { useEffect, useState } from "react";
+import "./App.css";
+import Header from "./Header";
+import { CardComponent } from "./components";
 
 function App() {
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [data, setData] = useState([]);
-  const [number, setnumber] = useState(1);
-
-  const fetchData = async() => {
+  const fetchProducts = async () => {
     try {
-      const datainapi = await fetch('https://jsonplaceholder.typicode.com/posts');
-      return datainapi.json();
+      const response = await fetch("https://dummyjson.com/products");
+      const data = await response.json();
+      setProducts(data.products);
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching products:", error);
     }
-  }
+  };
 
-  //runs only one time
-  useEffect(()=>{
-    fetchData();
-  },[number]);
-  
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
-  return ( 
+  return (
     <div className="App">
-      <Header />
-      {data.map((value,index)=>{
-        console.log(value);
-        return <CardComponent title={value.title} body={value.body}/>
-      })}
-      {/* {number} */}
-       <button onClick={()=> setnumber(number + 1)}>Click to reload api</button> 
+      <h1>Product List</h1>
+      {isLoading ? (
+        <p>Loading products...</p>
+      ) : (
+        products.map((product) => (
+          <CardComponent
+            key={product.id}
+            name={product.title}
+            price={product.price}
+          />
+        ))
+      )}
     </div>
   );
 }

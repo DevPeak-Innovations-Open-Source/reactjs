@@ -1,9 +1,22 @@
-.highlight{
+.product-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    text-align: left;
+    max-width: 300px;
+    display: inline-block;
+  }
+  
+  .product-name {
+    font-size: 18px;
     font-weight: bold;
-    background-color: aqua;
-    border-radius: 4px;
-}
-.subtitle{
-    font-size: 14px;
-    color: black;
-}
+    margin-bottom: 10px;
+  }
+  
+  .product-price {
+    color: #007b00;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  

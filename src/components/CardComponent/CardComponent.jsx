@@ -1,13 +1,11 @@
 import "./CardComponent.css";
 function CardComponent(props) {
-    // const {title,body}= props;
   return (
-    <div>
-      <span className="highlight">{props.title}</span>
-      <p className="subtitle">
-        {props.body}
-      </p>
+    <div className="product-card">
+      <h2 className="product-name">{props.name}</h2>
+      <p className="product-price">Price: ${props.price}</p>
     </div>
   );
 }
+
 export default CardComponent;
