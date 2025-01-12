@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Header from "./Header";
-import { CardComponent } from "./components";
 
 function App() {
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const fetchProducts = async () => {
     try {
       const response = await fetch("https://dummyjson.com/products");
       const data = await response.json();
       setProducts(data.products);
-      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -24,18 +20,30 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Product List</h1>
-      {isLoading ? (
-        <p>Loading products...</p>
-      ) : (
-        products.map((product) => (
-          <CardComponent
-            key={product.id}
-            name={product.title}
-            price={product.price}
-          />
-        ))
-      )}
+      <h1 className="underline">Product Table</h1>
+      
+      <table className="product-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product) => (
+            <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>{product.title}</td>
+              <td>Rs.{product.price}</td>
+              <td>{product.category}</td>
+              <td>{product.rating}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
