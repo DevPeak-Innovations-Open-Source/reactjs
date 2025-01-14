@@ -17,9 +17,7 @@ body, html {
     transition: margin-left 0.3s;
   }
   
-  .main-content.shifted {
-    margin-left: 200px;
-  }
+  
   
   .header {
     display: flex;
@@ -34,5 +32,22 @@ body, html {
   .search-box {
     padding: 5px;
     border-radius: 4px;
+  }
+  .results {
+    margin: 20px 0;
+  }
+  
+  .results ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .results li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .results p {
+    color: #999;
   }
   
