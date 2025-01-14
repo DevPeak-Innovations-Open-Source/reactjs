@@ -27,12 +27,12 @@
 .sidebar-logo {
   max-width: 40%;
   height: 50%;
-  transition: max-width 0.3s ease, height 0.3s ease; /* Smooth transition */
+  transition: max-width 0.3s ease, height 0.3s ease; 
 }
 
 .sidebar.closed .sidebar-logo {
-  opacity: 0; /* Makes the logo invisible */
-  visibility: hidden; /* Prevents interaction with the logo */
+  opacity: 0; 
+  visibility: hidden; 
 
 }
 .sidebar.closed .subtitle{
