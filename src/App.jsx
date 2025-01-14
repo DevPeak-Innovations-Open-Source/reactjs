@@ -1,51 +1,32 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+import React, { useState } from "react";
+import { Sidebar, Table, tripleDot } from "./components";
+import "./styles/App.css";
 
-function App() {
-  const [products, setProducts] = useState([]);
+const App = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch("https://dummyjson.com/products");
-      const data = await response.json();
-      setProducts(data.products);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
   };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   return (
-    <div className="App">
-      <h1 className="underline">Product Table</h1>
-      
-      <table className="product-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Rating</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.title}</td>
-              <td>Rs.{product.price}</td>
-              <td>{product.category}</td>
-              <td>{product.rating}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="app">
+      <Sidebar isOpen={isSidebarOpen} />
+      <div className={`main-content ${isSidebarOpen ? "shifted" : ""}`}>
+        <header className="header">
+          <img
+            src={tripleDot}
+            alt="Menu"
+            className="menu-btn"
+            onClick={toggleSidebar}
+          />
+
+          <input type="text" placeholder="Search" className="search-box" />
+        </header>
+        <Table />
+      </div>
     </div>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,38 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #03123B;
+}
+
+.app {
+  display: flex;
+  background-color: #03123B;
+  height: 100vh;
+  width: 100vw;
+}
+  
+  .main-content {
+    flex: 1;
+    transition: margin-left 0.3s;
+  }
+  
+  .main-content.shifted {
+    margin-left: 200px;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #03123B;
+    color: #fff;
+    
+  }
+  
+  .search-box {
+    padding: 5px;
+    border-radius: 4px;
+  }
+  
