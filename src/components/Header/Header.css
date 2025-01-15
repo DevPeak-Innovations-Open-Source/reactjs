@@ -1,0 +1,12 @@
+.navbar{
+   height: 80px;
+   background-color: #03123D;
+   color: white;
+   display: flex;
+   flex-direction: row;
+   gap: 70px;
+}
+.slideimg{
+   margin-top: 25px;
+   cursor: pointer;
+}

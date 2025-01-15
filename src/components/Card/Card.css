@@ -1,0 +1,39 @@
+.menu-card {
+  position: absolute;
+  top: 80px;
+  left: 223px;
+  width: calc(100vw - 223px);
+  height: calc(100vh - 80px);
+  background-color: #03123D;
+  color: white;
+}
+
+h3 {
+  margin: 2rem 3rem;
+}
+
+.table,th,td {
+  border-bottom: 1px solid white;
+
+ 
+}
+.table{
+   width: 80%;
+    margin: 1rem 3rem;
+    border: none;
+}
+
+tr th{
+    background-color: #4D5875;
+    color: white;
+    text-align: start;
+    padding: 12px 12px;
+}
+
+tr td{
+    /* background-color: #4D5875; */
+    color: white;
+    text-align: start;
+    padding: 12px 12px;
+}
+
