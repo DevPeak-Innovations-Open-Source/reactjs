@@ -4,6 +4,7 @@ import "./styles/App.css";
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
@@ -20,10 +21,15 @@ const App = () => {
             className="menu-btn"
             onClick={toggleSidebar}
           />
-
-          <input type="text" placeholder="Search" className="search-box" />
+          <input
+            type="text"
+            placeholder="Search"
+            className="search-box"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </header>
-        <Table />
+        <Table searchQuery={searchQuery} />
       </div>
     </div>
   );
