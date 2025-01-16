@@ -32,7 +32,7 @@
 
 }
 
-.cat1{
+.cat1,.cat2,.cat3,.cat4,.cat5{
     display: flex;
     flex-direction: row;
     gap: 2rem;

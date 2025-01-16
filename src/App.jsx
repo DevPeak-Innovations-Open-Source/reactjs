@@ -8,7 +8,7 @@ const App = () => {
     <div>
       <Header />
       <Slider/>
-      <Card/>
+      <Card />
     </div>
   );
 };

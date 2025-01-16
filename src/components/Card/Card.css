@@ -1,6 +1,6 @@
 .menu-card {
   position: absolute;
-  top: 80px;
+  top: 75px;
   left: 223px;
   width: calc(100vw - 223px);
   height: calc(100vh - 80px);
@@ -9,7 +9,7 @@
 }
 
 h3 {
-  margin: 2rem 3rem;
+  margin: 0.2rem 3rem;
 }
 
 .table,th,td {
@@ -19,8 +19,11 @@ h3 {
 }
 .table{
    width: 80%;
-    margin: 1rem 3rem;
+    /* margin: 0.3rem 3rem; */
+    margin: 3px 40px;
+    padding: 5px 5px;
     border: none;
+    font-size: 12px;
 }
 
 tr th{
