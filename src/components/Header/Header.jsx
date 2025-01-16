@@ -8,20 +8,19 @@ const Header = () => {
 
   return (
     <div className="navbar">
-      <img src="./star.png" alt="img not found" height={"100px"} />
-      <img
-        src="./slide.png"
-        className="slideimg"
-        height={"45px"}
-        width={"40px"}
-      />
+      <div className="navbar-logo-container">
+        <img src="./star.png" alt="img not found" className="navbar-logo" />
+        <img
+          src="./slide.png"
+          className="slideimg"
+        />
+      </div>
       <div className="search-container">
         <img src="./search.png" className="search-img" />
         <input
           placeholder="Search"
           className="search-box"
           name="Search"
-          
         />
       </div>
     </div>
