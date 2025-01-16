@@ -28,6 +28,8 @@
   max-width: 40%;
   height: 50%;
   transition: max-width 0.3s ease, height 0.3s ease; 
+  padding:0 1rem;
+  align-items: center;
 }
 
 .sidebar.closed .sidebar-logo {

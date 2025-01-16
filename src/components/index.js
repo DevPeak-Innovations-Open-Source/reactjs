@@ -9,3 +9,4 @@ export { default as filmsImage } from "../assests/filmsImage.png";
 export { default as listIcon1 } from "../assests/listIcon1.png";
 export { default as listIcon2 } from "../assests/listIcon2.png";
 export { default as tripleDot } from "../assests/triple.png";
+export { default as button } from "../assests/Menu Button.png";
