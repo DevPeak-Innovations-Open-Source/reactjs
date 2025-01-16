@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Table.css";
+import { listIcon1,listIcon2 } from ".";
+
 
 const Table = ({ searchQuery }) => {
   const [users, setUsers] = useState([]);
@@ -30,6 +32,14 @@ const Table = ({ searchQuery }) => {
     <div className="table-container">
       <div className="table-header">
         <div className="table-heading">User Information</div>
+        <div className="toggle-button">
+          <button className="list-toggle">
+            
+            <img src={listIcon1} alt="List Icon 1" className="toggle-icon" />
+            <img src={listIcon2} alt="List Icon 2" className="toggle-icon" />
+            <span className="list-text">List</span>
+          </button>
+        </div>
       </div>
       <table>
         <thead>
