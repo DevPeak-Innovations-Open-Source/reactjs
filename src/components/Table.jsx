@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./Table.css";
-import { listIcon1, listIcon2, filmsImage, button } from ".";
+import {
+  listIcon1,
+  listIcon2,
+  filmsImage,
+  button,
+  viewIcon,
+  downloadIcon,
+  renameIcon,
+  shareIcon,
+  moveIcon,
+  lockIcon,
+  deleteIcon,
+} from ".";
 
 const Table = ({ searchQuery }) => {
   const [users, setUsers] = useState([]);
-  const [view, setView] = useState("grid"); 
+  const [view, setView] = useState("grid");
+  const [dropdownOpen, setDropdownOpen] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,16 +42,42 @@ const Table = ({ searchQuery }) => {
     user.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const toggleView = () => {
-    setView((prevView) => (prevView === "grid" ? "list" : "grid"));
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".menu-wrapper")) {
+        setDropdownOpen(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const toggleDropdown = (index) => {
+    setDropdownOpen(dropdownOpen === index ? null : index);
   };
+
+  const dropdownItems = [
+    { icon: viewIcon, title: "View" },
+    { icon: downloadIcon, title: "Download" },
+    { icon: renameIcon, title: "Rename" },
+    { icon: shareIcon, title: "Share Link" },
+    { icon: moveIcon, title: "Move" },
+    { icon: lockIcon, title: "Mark Private" },
+    { icon: deleteIcon, title: "Delete", className: "delete" },
+  ];
 
   return (
     <div className="table-container">
       <div className="table-header">
         <div className="table-heading">User Information</div>
 
-        <div className="toggle-button" onClick={toggleView}>
+        <div
+          className="toggle-button"
+          onClick={() => setView(view === "grid" ? "list" : "grid")}
+        >
           {view === "list" ? (
             <>
               <img src={listIcon2} alt="List Icon" className="toggle-icon" />
@@ -64,35 +103,54 @@ const Table = ({ searchQuery }) => {
       </div>
 
       {view === "grid" && (
-  <div className="grid-container">
-   
-    {Array(6)
-      .fill(0)
-      .map((_, index) => (
-        <div key={index} className="grid-item">
-          
-          <div className="white-box"></div>
+        <div className="grid-container">
+          {Array(6)
+            .fill(0)
+            .map((_, index) => (
+              <div key={index} className="grid-item">
+                <div className="white-box"></div>
 
-         
-          <div className="movie-info">
-            <div className="movie-name-container">
-              <img
-                src={filmsImage}
-                alt="Movie Thumbnail"
-                className="movie-image"
-              />
-              <span className="movie-name">Movie Name </span>
-            </div>
-            <img src={button} alt="Menu Button" className="menu-icon" />
-          </div>
+                <div className="movie-info">
+                  <div className="movie-name-container">
+                    <img
+                      src={filmsImage}
+                      alt="Movie Thumbnail"
+                      className="movie-image"
+                    />
+                    <span className="movie-name">Movie Name</span>
+                  </div>
+
+                  <div className="menu-wrapper">
+                    <img
+                      src={button}
+                      alt="Menu Button"
+                      className="menu-icon"
+                      onClick={() => toggleDropdown(index)}
+                    />
+                    {dropdownOpen === index && (
+                      <div className="dropdown-menu">
+                        {dropdownItems.map((item, i) => (
+                          <div
+                            key={i}
+                            className={`dropdown-item ${item.className || ""}`}
+                          >
+                            <img
+                              src={item.icon}
+                              alt={item.title}
+                              className="dropdown-icon"
+                            />
+                            {item.title}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>
-      ))}
-  </div>
-)}
+      )}
 
-
-
-      
       {view === "list" && (
         <table>
           <thead>

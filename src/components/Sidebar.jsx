@@ -17,7 +17,14 @@ const Sidebar = ({ isOpen }) => {
     console.log("Species section open:", speciesOpen);
     console.log("Starships section open:", starshipsOpen);
     console.log("Vehicles section open:", vehiclesOpen);
-  }, [filmsOpen, peopleOpen, planetsOpen, speciesOpen, starshipsOpen, vehiclesOpen]);
+  }, [
+    filmsOpen,
+    peopleOpen,
+    planetsOpen,
+    speciesOpen,
+    starshipsOpen,
+    vehiclesOpen,
+  ]);
 
   const toggleSection = (section) => {
     switch (section) {
@@ -47,13 +54,34 @@ const Sidebar = ({ isOpen }) => {
   return (
     <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
       <div className="sidebar-header">
-        <img src={logo} alt="Logo" className={`sidebar-logo ${isOpen ? '' : 'closed'}`} />
+        <img
+          src={logo}
+          alt="Logo"
+          className={`sidebar-logo ${isOpen ? "" : "closed"}`}
+        />
       </div>
       <ul className="sidebar-menu">
-        <li onClick={() => toggleSection("films")} className={`menu-item ${filmsOpen ? "open" : ""}`}>
-          <img src={fileIcon} alt="File Icon" className={`icon ${isOpen ? '' : 'closed'}`} />
-          <span className={`title ${filmsOpen ? "open-title" : ""} ${!isOpen ? "closed" : ""}`}>Films</span>
-          <img src={arrowIcon} alt="Arrow" className={`arrow ${filmsOpen ? "open" : ""}`} />
+        <li
+          onClick={() => toggleSection("films")}
+          className={`menu-item ${filmsOpen ? "open" : ""}`}
+        >
+          <img
+            src={fileIcon}
+            alt="File Icon"
+            className={`icon ${isOpen ? "" : "closed"}`}
+          />
+          <span
+            className={`title ${filmsOpen ? "open-title" : ""} ${
+              !isOpen ? "closed" : ""
+            }`}
+          >
+            Films
+          </span>
+          <img
+            src={arrowIcon}
+            alt="Arrow"
+            className={`arrow ${filmsOpen ? "open" : ""}`}
+          />
         </li>
         {filmsOpen && (
           <ul className="submenu">
@@ -70,10 +98,27 @@ const Sidebar = ({ isOpen }) => {
           </ul>
         )}
 
-        <li onClick={() => toggleSection("people")} className={`menu-item ${peopleOpen ? "open" : ""}`}>
-          <img src={fileIcon} alt="File Icon" className={`icon ${isOpen ? '' : 'closed'}`} />
-          <span className={`title ${peopleOpen ? "open-title" : ""} ${!isOpen ? "closed" : ""}`}>People</span>
-          <img src={arrowIcon} alt="Arrow" className={`arrow ${peopleOpen ? "open" : ""}`} />
+        <li
+          onClick={() => toggleSection("people")}
+          className={`menu-item ${peopleOpen ? "open" : ""}`}
+        >
+          <img
+            src={fileIcon}
+            alt="File Icon"
+            className={`icon ${isOpen ? "" : "closed"}`}
+          />
+          <span
+            className={`title ${peopleOpen ? "open-title" : ""} ${
+              !isOpen ? "closed" : ""
+            }`}
+          >
+            People
+          </span>
+          <img
+            src={arrowIcon}
+            alt="Arrow"
+            className={`arrow ${peopleOpen ? "open" : ""}`}
+          />
         </li>
         {peopleOpen && (
           <ul className="submenu">
@@ -82,10 +127,27 @@ const Sidebar = ({ isOpen }) => {
           </ul>
         )}
 
-        <li onClick={() => toggleSection("planets")} className={`menu-item ${planetsOpen ? "open" : ""}`}>
-          <img src={fileIcon} alt="File Icon" className={`icon ${isOpen ? '' : 'closed'}`} />
-          <span className={`title ${planetsOpen ? "open-title" : ""} ${!isOpen ? "closed" : ""}`}>Planets</span>
-          <img src={arrowIcon} alt="Arrow" className={`arrow ${planetsOpen ? "open" : ""}`} />
+        <li
+          onClick={() => toggleSection("planets")}
+          className={`menu-item ${planetsOpen ? "open" : ""}`}
+        >
+          <img
+            src={fileIcon}
+            alt="File Icon"
+            className={`icon ${isOpen ? "" : "closed"}`}
+          />
+          <span
+            className={`title ${planetsOpen ? "open-title" : ""} ${
+              !isOpen ? "closed" : ""
+            }`}
+          >
+            Planets
+          </span>
+          <img
+            src={arrowIcon}
+            alt="Arrow"
+            className={`arrow ${planetsOpen ? "open" : ""}`}
+          />
         </li>
         {planetsOpen && (
           <ul className="submenu">
@@ -94,10 +156,27 @@ const Sidebar = ({ isOpen }) => {
           </ul>
         )}
 
-        <li onClick={() => toggleSection("species")} className={`menu-item ${speciesOpen ? "open" : ""}`}>
-          <img src={fileIcon} alt="File Icon" className={`icon ${isOpen ? '' : 'closed'}`} />
-          <span className={`title ${speciesOpen ? "open-title" : ""} ${!isOpen ? "closed" : ""}`}>Species</span>
-          <img src={arrowIcon} alt="Arrow" className={`arrow ${speciesOpen ? "open" : ""}`} />
+        <li
+          onClick={() => toggleSection("species")}
+          className={`menu-item ${speciesOpen ? "open" : ""}`}
+        >
+          <img
+            src={fileIcon}
+            alt="File Icon"
+            className={`icon ${isOpen ? "" : "closed"}`}
+          />
+          <span
+            className={`title ${speciesOpen ? "open-title" : ""} ${
+              !isOpen ? "closed" : ""
+            }`}
+          >
+            Species
+          </span>
+          <img
+            src={arrowIcon}
+            alt="Arrow"
+            className={`arrow ${speciesOpen ? "open" : ""}`}
+          />
         </li>
         {speciesOpen && (
           <ul className="submenu">
@@ -106,10 +185,27 @@ const Sidebar = ({ isOpen }) => {
           </ul>
         )}
 
-        <li onClick={() => toggleSection("starships")} className={`menu-item ${starshipsOpen ? "open" : ""}`}>
-          <img src={fileIcon} alt="File Icon" className={`icon ${isOpen ? '' : 'closed'}`} />
-          <span className={`title ${starshipsOpen ? "open-title" : ""} ${!isOpen ? "closed" : ""}`}>Starships</span>
-          <img src={arrowIcon} alt="Arrow" className={`arrow ${starshipsOpen ? "open" : ""}`} />
+        <li
+          onClick={() => toggleSection("starships")}
+          className={`menu-item ${starshipsOpen ? "open" : ""}`}
+        >
+          <img
+            src={fileIcon}
+            alt="File Icon"
+            className={`icon ${isOpen ? "" : "closed"}`}
+          />
+          <span
+            className={`title ${starshipsOpen ? "open-title" : ""} ${
+              !isOpen ? "closed" : ""
+            }`}
+          >
+            Starships
+          </span>
+          <img
+            src={arrowIcon}
+            alt="Arrow"
+            className={`arrow ${starshipsOpen ? "open" : ""}`}
+          />
         </li>
         {starshipsOpen && (
           <ul className="submenu">
@@ -118,10 +214,27 @@ const Sidebar = ({ isOpen }) => {
           </ul>
         )}
 
-        <li onClick={() => toggleSection("vehicles")} className={`menu-item ${vehiclesOpen ? "open" : ""}`}>
-          <img src={fileIcon} alt="File Icon" className={`icon ${isOpen ? '' : 'closed'}`} />
-          <span className={`title ${vehiclesOpen ? "open-title" : ""} ${!isOpen ? "closed" : ""}`}>Vehicles</span>
-          <img src={arrowIcon} alt="Arrow" className={`arrow ${vehiclesOpen ? "open" : ""}`} />
+        <li
+          onClick={() => toggleSection("vehicles")}
+          className={`menu-item ${vehiclesOpen ? "open" : ""}`}
+        >
+          <img
+            src={fileIcon}
+            alt="File Icon"
+            className={`icon ${isOpen ? "" : "closed"}`}
+          />
+          <span
+            className={`title ${vehiclesOpen ? "open-title" : ""} ${
+              !isOpen ? "closed" : ""
+            }`}
+          >
+            Vehicles
+          </span>
+          <img
+            src={arrowIcon}
+            alt="Arrow"
+            className={`arrow ${vehiclesOpen ? "open" : ""}`}
+          />
         </li>
         {vehiclesOpen && (
           <ul className="submenu">

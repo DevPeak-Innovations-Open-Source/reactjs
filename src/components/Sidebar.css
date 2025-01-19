@@ -1,7 +1,7 @@
 .sidebar {
-  width: 200px; 
+  width: 200px;
   height: 100vh;
-  background-color: #03123B;
+  background-color: #03123b;
   color: #fff;
   transition: width 0.3s ease;
   overflow: hidden;
@@ -9,38 +9,35 @@
 
 .sidebar.closed {
   width: 50px;
-  pointer-events: none;  
-  
- }
+  pointer-events: none;
+}
 
 .sidebar.opened {
-  width: calc(100% - 90%); 
-  
+  width: calc(100% - 90%);
 }
 
 .sidebar-header {
   padding: 15px;
   text-align: center;
-  background-color: #03123B;
+  background-color: #03123b;
 }
 
 .sidebar-logo {
   max-width: 40%;
   height: 50%;
-  transition: max-width 0.3s ease, height 0.3s ease; 
-  padding:0 1rem;
+  transition: max-width 0.3s ease, height 0.3s ease;
+  padding: 0 1rem;
   align-items: center;
 }
 
 .sidebar.closed .sidebar-logo {
-  opacity: 0; 
-  visibility: hidden; 
-
-}
-.sidebar.closed .subtitle{
   opacity: 0;
-  visibility: hidden; 
-  pointer-events: none; 
+  visibility: hidden;
+}
+.sidebar.closed .subtitle {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .sidebar-menu {
@@ -74,8 +71,8 @@
 }
 
 .sidebar.closed .title {
-  opacity: 0; 
-  width: 0; 
+  opacity: 0;
+  width: 0;
 }
 
 .sidebar-menu .arrow {
@@ -102,11 +99,11 @@
 .toggle-btn {
   position: absolute;
   bottom: 20px;
-  left: calc(100% - 30px); 
+  left: calc(100% - 30px);
   transform: translateX(-50%);
   width: 30px;
   height: 30px;
-  background-color: #03123B;
+  background-color: #03123b;
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -115,5 +112,5 @@
 }
 
 .sidebar.closed .toggle-btn {
-  left: calc(50px - 15px); 
+  left: calc(50px - 15px);
 }

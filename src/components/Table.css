@@ -1,6 +1,6 @@
 .table-container {
   padding: 10px;
-  background-color:  #03123D;
+  background-color: #03123d;
   color: white;
   font-family: Arial, sans-serif;
 }
@@ -10,10 +10,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
- margin-left: 50px;
-  
+  margin-left: 50px;
 }
-
 
 .table-heading {
   font-size: 1.5rem;
@@ -23,9 +21,9 @@
 .toggle-button {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background-color: #1e293b;
-  padding: 8px 12px;
+  padding: 6px 9px;
   border-radius: 5px;
   cursor: pointer;
   border: 1px solid white;
@@ -47,11 +45,11 @@
 }
 
 .secondary-icon {
-  opacity: 0.6;
+  opacity: 0.9;
 }
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px;
 }
@@ -60,7 +58,7 @@
   background-color: white;
   padding: 20px;
   border-radius: 5px;
-  height: 100px; 
+  height: 100px;
 }
 
 .movie-info {
@@ -72,15 +70,14 @@
 
 .movie-name-container {
   display: flex;
-  
+
   align-items: center;
- gap: 5px;
+  gap: 5px;
 }
 
 .movie-image {
-  width: 20px; 
+  width: 20px;
   height: 20px;
- 
 }
 
 .movie-name {
@@ -88,10 +85,7 @@
   font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
-  
-  
 }
-
 
 .menu-icon {
   width: 24px;
@@ -100,21 +94,20 @@
 }
 
 .grid-item {
-  background-color: #F9FAFD33;
+  background-color: #f9fafd33;
   padding: 10px;
   text-align: center;
   border-radius: 5px;
-  width: 300px; 
+  width: 300px;
 }
-
-
 
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #334155;
   padding: 10px;
 }
@@ -128,15 +121,53 @@ th {
   margin-left: 8px;
 }
 .menu-icon {
-  width:24.33px;
+  width: 24.33px;
   height: 20px;
   padding: 0px 0px 0px 30px;
   gap: 50px;
   border-radius: 5px 0px 0px 0px;
   opacity: 0px;
   margin-left: 20px;
- 
 }
-.menu-icon1{
+.menu-icon1 {
   width: 50px;
+}
+.menu-wrapper {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 30px;
+  
+  right: -65px;
+  background: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 160px;
+  padding: 10px 0;
+  z-index: 100;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #f3f4f6;
+}
+
+.dropdown-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.delete {
+  color: red;
 }
