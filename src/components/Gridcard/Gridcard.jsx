@@ -46,9 +46,12 @@ const Gridcard = ({ product }) => {
               className="menu-img"
             ></img>
 
-            <div>
+{/**Always make a parent div and it's class defined before map in case of absoult and relative */}
+            <div className="hover-menu-container">
 
             {productmenu.map((item, index) => {
+              //Always check console.log if you doubt your data isn't rendering
+              console.log(item);
               return (
                 <div className="hover-menu" key={index}>
                   <div className="menu">

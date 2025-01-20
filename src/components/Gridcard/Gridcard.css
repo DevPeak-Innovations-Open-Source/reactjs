@@ -67,8 +67,12 @@
   margin-top: 4px;
 }
 
-.hover-menu {
-  display: none;
+/* always make a parent div to align style before mapping*/
+.hover-menu-container {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  height: 238px;
   position: absolute; 
   top: 100%;
   left: 0;
@@ -78,14 +82,18 @@
   padding: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 10;
-  width: 150px;
-  height: 238px;
   font-size: 0.9rem;
+}
+
+/* Never make styling absolute which is getting mapped*/
+.hover-menu {
+  /* display: none; */
 }
 
 .menu{
   display: flex;
-  
+  /*Always check color shou;dn't match it's background*/
+  color: black;
 }
 
 
