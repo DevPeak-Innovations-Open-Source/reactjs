@@ -1,9 +1,7 @@
-.menu-card {
-  position: absolute;
-  top: 75px;
-  left: 223px;
-  width: calc(100vw - 223px);
-  height: calc(100vh - 80px);
+ .menu-card {
+  
+ height: 100vh;
+  width: calc(100vw - 50px) ;
   background-color: #03123D;
   color: white;
 }
@@ -18,25 +16,25 @@ h3 {
  
 }
 .table{
-   width: 80%;
-    /* margin: 0.3rem 3rem; */
-    margin: 3px 40px;
+   width: 100%;
+    
     padding: 5px 5px;
     border: none;
     font-size: 12px;
+    
 }
 
 tr th{
     background-color: #4D5875;
     color: white;
     text-align: start;
-    padding: 12px 12px;
+    padding: 12px;
 }
 
 tr td{
     /* background-color: #4D5875; */
     color: white;
     text-align: start;
-    padding: 12px 12px;
+    padding: 12px;
 }
 

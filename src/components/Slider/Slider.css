@@ -1,39 +1,120 @@
-.slider{
-    width: 223px;
-    height: calc(100vh - 80px);
-    background-color: #03123D;
-    display: flex;
-    flex-direction: column;
+.sidebar {
+  width: 200px; 
+  height: 100vh;
+  background-color: #03123B;
+  color: #fff;
+  transition: width 0.3s ease;
+  overflow: hidden;
 }
 
-.films{
-    background-color:#CB1A80;
-    color: white;
-    margin: 12px 12px;
-    padding: 12px 10px ;
-    border-radius: 10px;
-    
+.sidebar.closed {
+  width: 50px;
+  pointer-events: none;  
+  
+ }
+
+.sidebar.opened {
+  width: calc(100% - 90%); 
+  
 }
 
-.Movie-Name{
-    background-color: #4D5875;
-    color: white;
-    border-radius: 10px;
-    margin: 4px 12px;
-    padding: 12px 10px ;
-
+.sidebar-header {
+  padding: 15px;
+  text-align: center;
+  background-color: #03123B;
 }
 
-.cat1,.cat2,.cat3,.cat4,.cat5{
-    background: transparent;
-    color:white;
-    margin: 4px 12px;
-    padding: 12px 10px ;
-
+.sidebar-logo {
+  max-width: 40%;
+  height: 50%;
+  transition: max-width 0.3s ease, height 0.3s ease; 
+  padding:0 1rem;
+  align-items: center;
+  
 }
 
-.cat1,.cat2,.cat3,.cat4,.cat5{
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-  }
+.sidebar.closed .sidebar-logo {
+  opacity: 0; 
+  visibility: hidden; 
+
+}
+.sidebar.closed .subtitle{
+  opacity: 0;
+  visibility: hidden; 
+  pointer-events: none; 
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-menu li:hover {
+  background-color: #444;
+}
+
+.sidebar-menu .icon {
+  margin-right: 19px;
+}
+
+.sidebar-menu .title {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.closed .title {
+  opacity: 0; 
+  width: 0; 
+}
+
+.sidebar-menu .arrow {
+  margin-left: auto;
+  transform: rotate(0);
+  transition: transform 0.3s ease;
+}
+
+.sidebar-menu .arrow.open {
+  transform: rotate(90deg);
+}
+
+.submenu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 0 0 15px;
+}
+
+.submenu .subtitle {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.toggle-btn {
+  position: absolute;
+  bottom: 20px;
+  left: calc(100% - 30px); 
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: #03123B;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: left 0.3s ease;
+}
+
+.sidebar.closed .toggle-btn {
+  left: calc(50px - 15px); 
+}
