@@ -20,6 +20,14 @@ const productmenu = [
     menuitem: "Move",
     menuimg: move,
   },
+  {
+    menuitem: "Move",
+    menuimg: move,
+  },
+  {
+    menuitem: "Move",
+    menuimg: move,
+  },
 ];
 
 
@@ -47,7 +55,7 @@ const Gridcard = ({ product }) => {
             ></img>
 
 {/**Always make a parent div and it's class defined before map in case of absoult and relative */}
-            <div className="hover-menu-container">
+          <div className="hover-menu-container">
 
             {productmenu.map((item, index) => {
               //Always check console.log if you doubt your data isn't rendering
@@ -60,6 +68,7 @@ const Gridcard = ({ product }) => {
                       alt={item.menuitem}
                       className="dropdrownimg"
                     />
+                    
                     {item.menuitem}
                   </div>
                 </div>

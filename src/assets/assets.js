@@ -7,6 +7,7 @@ import productimg from './productimg.png'
 import productmenu from './productmenu.png'
 import view from './view.png'
 import download from './download.png'
+import welcomeimg from './welcomeimg.png'
 
 export const assets ={
     slidelogo,
@@ -17,7 +18,9 @@ export const assets ={
     productimg,
     productmenu,
     view,
-    download
+    download,
+    welcomeimg
+
 
 
 

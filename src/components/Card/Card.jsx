@@ -16,8 +16,6 @@ const Card = ({ searchQuery }) => {
     }
   };
 
-  
-
   // console.log(false?"1":0);
 
   useEffect(() => {
@@ -36,10 +34,13 @@ const Card = ({ searchQuery }) => {
 
   return (
     <div className="menu-card">
-      <h3>Product Data</h3>
-      <button onClick={() => setswitchtoggle(!switchtoggle)}>
-        {switchtoggle ? "list" : "grid"}
-      </button>
+      <div className="">
+        <h3>Product Data</h3>
+        <button onClick={() => setswitchtoggle(!switchtoggle)}>
+          {switchtoggle ? "list" : "grid"}
+        </button>
+      </div>
+
       {switchtoggle ? (
         <table className="table">
           <thead>
@@ -49,23 +50,19 @@ const Card = ({ searchQuery }) => {
             </tr>
           </thead>
           <tbody>
-
             {filteredProducts.map((product) => (
               <tr key={product.id}>
                 <td>{product.title}</td>
                 <td>{product.price}</td>
               </tr>
-            ))} 
-
+            ))}
           </tbody>
         </table>
       ) : (
         <div className="card-area">
-        {
-          filteredProducts.map((product) => {
-          return <Gridcard  product={product} key={product.id} />;
-        })
-        }
+          {filteredProducts.map((product) => {
+            return <Gridcard product={product} key={product.id} />;
+          })}
         </div>
       )}
     </div>
