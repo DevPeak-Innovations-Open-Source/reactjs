@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
 import { logo, fileIcon, arrowIcon, filmsImage } from ".";
+import { Link,Outlet } from "react-router-dom";
+
 
 const Sidebar = ({ isOpen }) => {
   const [filmsOpen, setFilmsOpen] = useState(false);
@@ -9,6 +11,7 @@ const Sidebar = ({ isOpen }) => {
   const [speciesOpen, setSpeciesOpen] = useState(false);
   const [starshipsOpen, setStarshipsOpen] = useState(false);
   const [vehiclesOpen, setVehiclesOpen] = useState(false);
+  
 
   useEffect(() => {
     console.log("Films section open:", filmsOpen);
@@ -52,6 +55,7 @@ const Sidebar = ({ isOpen }) => {
   };
 
   return (
+    
     <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
       <div className="sidebar-header">
         <img
@@ -60,6 +64,8 @@ const Sidebar = ({ isOpen }) => {
           className={`sidebar-logo ${isOpen ? "" : "closed"}`}
         />
       </div>
+      
+      
       <ul className="sidebar-menu">
         <li
           onClick={() => toggleSection("films")}
@@ -70,13 +76,16 @@ const Sidebar = ({ isOpen }) => {
             alt="File Icon"
             className={`icon ${isOpen ? "" : "closed"}`}
           />
-          <span
+
+          <Link 
+            to="/userinformation"
             className={`title ${filmsOpen ? "open-title" : ""} ${
               !isOpen ? "closed" : ""
             }`}
           >
-            Films
-          </span>
+            User Information
+           </Link>
+
           <img
             src={arrowIcon}
             alt="Arrow"
@@ -87,9 +96,10 @@ const Sidebar = ({ isOpen }) => {
           <ul className="submenu">
             <li className="subtitle">
               <img src={filmsImage} alt="Movie Logo" className="movie-logo" />
-              Movie 1
+              <Link to="/welcome"> Welcome </Link>
               <img src={arrowIcon} alt="Arrow" className="arrow" />
             </li>
+
             <li className="subtitle">
               <img src={filmsImage} alt="Movie Logo" className="movie-logo" />
               Movie 2
@@ -243,6 +253,7 @@ const Sidebar = ({ isOpen }) => {
           </ul>
         )}
       </ul>
+      <Outlet />
     </div>
   );
 };

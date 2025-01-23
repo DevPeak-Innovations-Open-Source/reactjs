@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import { Sidebar, Table, tripleDot } from "./components";
+import { Sidebar, Table, tripleDot  } from "./components";
 import "./styles/App.css";
+import { Routes, Route } from "react-router-dom";
+import Welcome from "./components/welcome"; 
+import ProtectedRoute from "./components/ProtectedRoute";
+
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -11,6 +15,7 @@ const App = () => {
   };
 
   return (
+    
     <div className="app">
       <Sidebar isOpen={isSidebarOpen} />
       <div className={`main-content ${isSidebarOpen ? "shifted" : ""}`}>
@@ -29,7 +34,18 @@ const App = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </header>
-        <Table searchQuery={searchQuery} />
+        
+        <Routes>
+          <Route path="/" element={<Table searchQuery={searchQuery} />} />
+          
+        <Route
+            path="userinformation"
+            element={<Table searchQuery={searchQuery} />}
+          />
+          <Route path="welcome" element={<Welcome />} />
+          <Route path="protectedroute" element={<ProtectedRoute isAuthenticated><div>This is protected route</div></ProtectedRoute> } />
+        </Routes>
+        
       </div>
     </div>
   );

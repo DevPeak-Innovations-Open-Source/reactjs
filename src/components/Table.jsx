@@ -16,7 +16,7 @@ import {
 
 const Table = ({ searchQuery }) => {
   const [users, setUsers] = useState([]);
-  const [view, setView] = useState("grid");
+  const [view, setView] = useState("list");
   const [dropdownOpen, setDropdownOpen] = useState(null);
 
   useEffect(() => {
@@ -38,8 +38,10 @@ const Table = ({ searchQuery }) => {
     fetchData();
   }, []);
 
-  const filteredUsers = users.filter((user) =>
-    user.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name &&
+      user.name.toLowerCase().includes((searchQuery || "").toLowerCase())
   );
 
   useEffect(() => {
@@ -76,7 +78,7 @@ const Table = ({ searchQuery }) => {
 
         <div
           className="toggle-button"
-          onClick={() => setView(view === "grid" ? "list" : "grid")}
+          onClick={() => setView(view === "list" ? "grid" : "list")}
         >
           {view === "list" ? (
             <>
@@ -104,12 +106,13 @@ const Table = ({ searchQuery }) => {
 
       {view === "grid" && (
         <div className="grid-container">
+          
           {Array(6)
             .fill(0)
             .map((_, index) => (
-              <div key={index} className="grid-item">
-                <div className="white-box"></div>
-
+              <div key={index}>
+                <div className="white-box"></div> 
+                <div className="grid-item">
                 <div className="movie-info">
                   <div className="movie-name-container">
                     <img
@@ -145,6 +148,7 @@ const Table = ({ searchQuery }) => {
                       </div>
                     )}
                   </div>
+                </div>
                 </div>
               </div>
             ))}

@@ -55,7 +55,7 @@
 }
 
 .sidebar-menu li:hover {
-  background-color: #444;
+  background-color: #cb1a80;
 }
 
 .sidebar-menu .icon {
@@ -113,4 +113,42 @@
 
 .sidebar.closed .toggle-btn {
   left: calc(50px - 15px);
+}
+.sidebar-menu a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebar-menu a:visited {
+  color: inherit;
+}
+
+.sidebar-menu a:hover {
+  text-decoration: none;
+}
+
+.sidebar-menu a:focus {
+  outline: none;
+}
+
+body {
+  background-color: #0b1120;
+  color: white;
+  transition: 0.3s;
+}
+
+.light-theme {
+  background-color: white;
+  color: black;
+}
+
+.dark-theme {
+  background-color: #0b1120;
+  color: white;
+}
+
+button {
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
 }
