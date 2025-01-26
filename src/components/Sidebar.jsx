@@ -117,13 +117,15 @@ const Sidebar = ({ isOpen }) => {
             alt="File Icon"
             className={`icon ${isOpen ? "" : "closed"}`}
           />
-          <span
-            className={`title ${peopleOpen ? "open-title" : ""} ${
+          <Link 
+            to="/upload"
+            className={`title ${filmsOpen ? "open-title" : ""} ${
               !isOpen ? "closed" : ""
             }`}
           >
-            People
-          </span>
+            Upload
+           </Link>
+
           <img
             src={arrowIcon}
             alt="Arrow"

@@ -11,6 +11,10 @@ export { default as listIcon1 } from "../assests/listIcon1.png";
 export { default as listIcon2 } from "../assests/listIcon2.png";
 export { default as tripleDot } from "../assests/triple.png";
 export { default as button } from "../assests/Menu Button.png";
+export { default as uploadIcon } from "../assests/upload.png";
+export { default as star } from "../assests/Star.png";
+export { default as frame } from "../assests/Frame.png";
+export { default as file } from "../assests/file.png";
 
 export { default as downloadIcon } from "../assests/Frame.png";
 export { default as shareIcon } from "../assests/Frame (2).png";

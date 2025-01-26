@@ -4,6 +4,7 @@ import "./styles/App.css";
 import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/welcome"; 
 import ProtectedRoute from "./components/ProtectedRoute";
+import UploadPage from "./components/UploadPage";
 
 
 const App = () => {
@@ -43,6 +44,7 @@ const App = () => {
             element={<Table searchQuery={searchQuery} />}
           />
           <Route path="welcome" element={<Welcome />} />
+          <Route path="/upload" element={<UploadPage />} />
           <Route path="protectedroute" element={<ProtectedRoute isAuthenticated><div>This is protected route</div></ProtectedRoute> } />
         </Routes>
         
