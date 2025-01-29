@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/welcome"; 
 import ProtectedRoute from "./components/ProtectedRoute";
 import UploadPage from "./components/UploadPage";
+import Video from "./components/Video";
 
 
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
           />
           <Route path="welcome" element={<Welcome />} />
           <Route path="/upload" element={<UploadPage />} />
+          <Route path="/video" element={<Video />} />
           <Route path="protectedroute" element={<ProtectedRoute isAuthenticated><div>This is protected route</div></ProtectedRoute> } />
         </Routes>
         

@@ -148,13 +148,14 @@ const Sidebar = ({ isOpen }) => {
             alt="File Icon"
             className={`icon ${isOpen ? "" : "closed"}`}
           />
-          <span
-            className={`title ${planetsOpen ? "open-title" : ""} ${
+          <Link 
+            to="/video"
+            className={`title ${filmsOpen ? "open-title" : ""} ${
               !isOpen ? "closed" : ""
             }`}
           >
-            Planets
-          </span>
+            Video
+           </Link>
           <img
             src={arrowIcon}
             alt="Arrow"

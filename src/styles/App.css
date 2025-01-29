@@ -16,7 +16,9 @@ body, html {
     flex: 1;
     transition: margin-left 0.3s;
   }
-  
+  .menu-btn{
+    cursor: pointer;
+  } 
   
   
   .header {

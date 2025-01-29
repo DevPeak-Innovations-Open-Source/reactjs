@@ -7,6 +7,13 @@
   margin: auto;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   margin-top: 30px;
+  transition: height 0.3s ease, padding 0.3s ease;
+}
+
+.upload-box.dragging {
+  color: #000;
+  background-color: blue;
+  border: 2px dashed white;
 }
 
 .header-left h4 {
@@ -34,16 +41,9 @@
 }
 
 .upload-box {
-  border: 2px dashed black;
   border-radius: 10px;
-  padding: 20px;
-  margin: auto;
-  height: 100px;
   text-align: center;
   position: relative;
-}
-
-.upload-box {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -157,8 +157,7 @@
 
   position: relative;
   overflow: hidden;
-  padding-left: 30px; 
-  
+  padding-left: 30px;
 }
 
 .progress-bar.full::before {
@@ -199,6 +198,8 @@
 .button-group {
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  bottom: 35px;
 }
 
 .cancel-btn,
@@ -218,4 +219,49 @@
   background: black;
   color: pink;
   border-radius: 5px;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.popup button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #333;
+}
+
+.error-message {
+  margin-top: 20px;
+  color: red;
+  text-align: center;
+}
+
+.upload-box.drag-over {
+  background-color: rgba(0, 0, 0, 0.1);
 }
