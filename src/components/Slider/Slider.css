@@ -1,10 +1,23 @@
 .sidebar {
-  width: 200px; 
+  width: 210px; 
   height: 100vh;
   background-color: #03123B;
   color: #fff;
   transition: width 0.3s ease;
   overflow: hidden;
+  padding: 0 10px;
+}
+
+.upload-list{
+  background-color: #CB1A80;
+  border-radius:6px;
+}
+
+
+.welcome-list{
+  background-color: #4D5875;
+  border-radius:6px;
+  
 }
 
 .sidebar.closed {
@@ -56,10 +69,12 @@
   padding: 10px 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 8px;
 }
 
 .sidebar-menu li:hover {
   background-color: #444;
+  border-radius: 6px;
 }
 
 .sidebar-menu .icon {
@@ -119,3 +134,7 @@
   left: calc(50px - 15px); 
 }
 
+.custom-link{
+  text-decoration: none;
+  color: inherit;
+}

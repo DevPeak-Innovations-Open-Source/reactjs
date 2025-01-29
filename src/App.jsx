@@ -10,6 +10,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Gridcard from "./components/Gridcard/Gridcard";
 import Login from "./components/Login/Login";
 import Protected from "./components/Protected";
+import Uploadpage from "./components/Uploadpage/Uploadpage";
+import Videopage from "./components/Videopage/Videopage";
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -60,11 +62,16 @@ const App = () => {
         <div className="slide-card-container">
           <Slider isOpen={isSidebarOpen} />
 
-          
           <Routes>
             <Route path="/" element={<Card searchQuery={searchQuery} />} />
-            <Route path="/welcome" element={<Protected Component = {Welcomepage} />} />
-            <Route path="/login" element=<Login/> />
+            <Route
+              path="/welcome"
+              element={<Protected Component={Welcomepage} />}
+            />
+            <Route path="/login" element=<Login /> />
+            <Route path="/uploadpage" element=<Uploadpage /> />
+            <Route path="/videopage" element=<Videopage /> />
+            
           </Routes>
         </div>
       </div>

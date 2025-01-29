@@ -8,6 +8,10 @@ import productmenu from './productmenu.png'
 import view from './view.png'
 import download from './download.png'
 import welcomeimg from './welcomeimg.png'
+import Repo from './Repo.png'
+import imgfold from './img-fold.png'
+import Group from './Group.png'
+import video from '../assets/video.mp4'
 
 export const assets ={
     slidelogo,
@@ -19,7 +23,13 @@ export const assets ={
     productmenu,
     view,
     download,
-    welcomeimg
+    welcomeimg,
+    Repo,
+    imgfold,
+    Group,
+    video
+
+    
 
 
 
