@@ -1,25 +1,17 @@
 import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import { validateEmail, validateContact } from "./utils/validation";
 import "./App.css";
 
-const App = () => {
+const MyForm = () => {
   return (
-    <div>
-      <h1>Formik Form</h1>
+    <div className="form-wrapper">
+      <h2 className="form-heading">Formik</h2>
+
       <Formik
-        initialValues={{
-          name: "",
-          email: "",
-          contact: "",
-          gender: "",
-        }}
+        initialValues={{ username: "", email: "", contact: "" }}
         validate={(values) => {
           const errors = {};
-
-          if (!values.name) {
-            errors.name = "Name is required";
-          }
 
           const emailError = validateEmail(values.email);
           if (emailError) {
@@ -31,78 +23,59 @@ const App = () => {
             errors.contact = contactError;
           }
 
-          if (!values.gender) {
-            errors.gender = "Gender is required";
-          }
-
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log("Form Submitted:", values);
-          setSubmitting(false);
+        onSubmit={(values, { setSubmitting, resetForm }) => {
+          const requestData = {
+            title: `Name:${values.username}`,
+            body: `Email: ${values.email}, Contact: ${values.contact}`,
+            userId: 1,
+          };
+
+          fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "POST",
+            body: JSON.stringify(requestData),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              console.log("Response from API:", json);
+              alert("Form submitted successfully!");
+              resetForm();
+            })
+            .catch((error) => {
+              console.error("Error submitting form:", error);
+              alert("Failed to submit the form. Try again.");
+            })
+            .finally(() => {
+              setSubmitting(false);
+            });
         }}
       >
-        {({ isSubmitting }) => (
-          <Form>
-            <div>
-              <label htmlFor="name">Name</label>
-              <Field type="text" id="name" name="name" />
-              <ErrorMessage
-                name="name"
-                component="div"
-                style={{ color: "red" }}
-              />
-            </div>
+        {({ setFieldValue, isSubmitting }) => (
+          <Form className="form-container">
+            <label className="label">Username:</label>
+            <Field
+              name="username"
+              className="input"
+              onChange={(e) => {
+                const usernameValue = e.target.value;
+                setFieldValue("username", usernameValue.toUpperCase());
+                setFieldValue("email", usernameValue ? `${usernameValue.replace(/\s+/g, '').toLowerCase()}@gmail.com` : "");
+              }}
+            />
 
-            <div>
-              <label htmlFor="email">Email</label>
-              <Field type="email" id="email" name="email" />
-              <ErrorMessage
-                name="email"
-                component="div"
-                style={{ color: "red" }}
-              />
-            </div>
+            <label htmlFor="email">Email</label>
+            <Field type="email" id="email" name="email" className="input" />
 
-            <div>
-              <label htmlFor="contact">Contact</label>
-              <Field type="text" id="contact" name="contact" />
-              <ErrorMessage
-                name="contact"
-                component="div"
-                style={{ color: "red" }}
-              />
-            </div>
+            <label htmlFor="contact">Contact</label>
+            <Field type="text" id="contact" name="contact" className="input" />
 
-            <div>
-              <label>Gender</label>
-
-              <div className="gender-options">
-                <label>
-                  <Field type="radio" name="gender" value="male" />
-                  Male
-                </label>
-                <label>
-                  <Field type="radio" name="gender" value="female" />
-                  Female
-                </label>
-                <label>
-                  <Field type="radio" name="gender" value="other" />
-                  Other
-                </label>
-              </div>
-              <ErrorMessage
-                name="gender"
-                component="div"
-                style={{ color: "red" }}
-              />
-            </div>
-
-            <div>
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
-            </div>
+            <button type="submit" className="button" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit"}
+            </button>
           </Form>
         )}
       </Formik>
@@ -110,4 +83,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default MyForm;
