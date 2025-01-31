@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { validateEmail, validateContact } from "./utils/validation";
 import "./App.css";
 
 const MyForm = () => {
+  const [submittedData, setSubmittedData] = useState(null); 
+
   return (
     <div className="form-wrapper">
       <h2 className="form-heading">Formik</h2>
@@ -27,25 +29,41 @@ const MyForm = () => {
         }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           const requestData = {
-            title: `Name: ${values.username}`,
-            body: `Email: ${values.email}, Contact: ${values.contact}`,
-            userId: 1,
+            username: values.username,
+            email: values.email,
+            contact: values.contact,
           };
 
-          fetch("https://jsonplaceholder.typicode.com/posts", {
-            method: "POST",
-            body: JSON.stringify(requestData),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          })
-            .then((response) => response.json())
-            .then((json) => {
+          console.log("Sending data:", requestData);
+
+          fetch(
+            "https://expressjs-backend-6h6x.onrender.com/post-contact-details",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestData),
+            }
+          )
+            .then((response) => {
+              console.log("Response Status:", response.status);
+              if (!response.ok) {
+                throw new Error(
+                  "Failed to submit form: " + response.statusText
+                );
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("Success:", data);
               alert("Form submitted successfully!");
+              setSubmittedData(requestData); 
               resetForm();
             })
-            .catch(() => {
-              alert("Failed to submit the form. Try again.");
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("Failed to submit the form. Please try again.");
             })
             .finally(() => {
               setSubmitting(false);
@@ -94,6 +112,21 @@ const MyForm = () => {
           </Form>
         )}
       </Formik>
+
+      {submittedData && (
+        <div className="submitted-data">
+          <h3>Submitted Details</h3>
+          <p>
+            <strong>Username:</strong> {submittedData.username}
+          </p>
+          <p>
+            <strong>Email:</strong> {submittedData.email}
+          </p>
+          <p>
+            <strong>Contact:</strong> {submittedData.contact}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
