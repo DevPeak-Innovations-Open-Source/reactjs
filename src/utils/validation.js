@@ -10,8 +10,10 @@ export const validateEmail = (email) => {
 export const validateContact = (contact) => {
   if (!contact) {
     return "Contact is required";
-  } else if (!/^\d{10}$/.test(contact)) {
-    return "Contact number must be 10 digits";
+  } else if (!/^\d+$/.test(contact)) {
+    return "Contact number must contain only digits";
+  } else if (contact.length !== 10) {
+    return "Contact number must be exactly 10 digits";
   }
   return "";
 };

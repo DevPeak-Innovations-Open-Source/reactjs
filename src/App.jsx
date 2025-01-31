@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { validateEmail, validateContact } from "./utils/validation";
 import "./App.css";
 
@@ -27,7 +27,7 @@ const MyForm = () => {
         }}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           const requestData = {
-            title: `Name:${values.username}`,
+            title: `Name: ${values.username}`,
             body: `Email: ${values.email}, Contact: ${values.contact}`,
             userId: 1,
           };
@@ -41,12 +41,10 @@ const MyForm = () => {
           })
             .then((response) => response.json())
             .then((json) => {
-              console.log("Response from API:", json);
               alert("Form submitted successfully!");
               resetForm();
             })
-            .catch((error) => {
-              console.error("Error submitting form:", error);
+            .catch(() => {
               alert("Failed to submit the form. Try again.");
             })
             .finally(() => {
@@ -63,15 +61,32 @@ const MyForm = () => {
               onChange={(e) => {
                 const usernameValue = e.target.value;
                 setFieldValue("username", usernameValue.toUpperCase());
-                setFieldValue("email", usernameValue ? `${usernameValue.replace(/\s+/g, '').toLowerCase()}@gmail.com` : "");
+                setFieldValue(
+                  "email",
+                  usernameValue
+                    ? `${usernameValue
+                        .replace(/\s+/g, "")
+                        .toLowerCase()}@gmail.com`
+                    : ""
+                );
               }}
             />
 
             <label htmlFor="email">Email</label>
             <Field type="email" id="email" name="email" className="input" />
+            <ErrorMessage
+              name="email"
+              component="div"
+              className="error-message"
+            />
 
             <label htmlFor="contact">Contact</label>
             <Field type="text" id="contact" name="contact" className="input" />
+            <ErrorMessage
+              name="contact"
+              component="div"
+              className="error-message"
+            />
 
             <button type="submit" className="button" disabled={isSubmitting}>
               {isSubmitting ? "Submitting..." : "Submit"}
