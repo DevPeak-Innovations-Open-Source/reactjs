@@ -1,19 +1,17 @@
 export const validateEmail = (email) => {
-  if (!email) {
-    return "Email is required";
-  } else if (!/\S+@\S+\.\S+/.test(email)) {
-    return "Email is invalid";
-  }
+  if (!email) return "Email is required";
+  if (!/\S+@\S+\.\S+/.test(email)) return "Email is invalid";
   return "";
 };
 
-export const validateContact = (contact) => {
-  if (!contact) {
-    return "Contact is required";
-  } else if (!/^\d+$/.test(contact)) {
-    return "Contact number must contain only digits";
-  } else if (contact.length !== 10) {
-    return "Contact number must be exactly 10 digits";
-  }
+export const validatePassword = (password) => {
+  if (!password) return "Password is required";
+  if (password.length < 6) return "Password must be at least 6 characters";
+  if (!/[a-z]/.test(password)) return "Password must contain at least one lowercase letter";
+  if (!/[A-Z]/.test(password)) return "Password must contain at least one uppercase letter";
+  if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) return "Password must contain at least one special character";
+  
   return "";
 };
+
+
