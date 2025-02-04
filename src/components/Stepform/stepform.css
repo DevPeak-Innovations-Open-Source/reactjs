@@ -1,0 +1,218 @@
+body {
+  overflow-x: hidden;
+}
+
+.step-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.steps-container {
+  width: 100%;
+}
+
+.step-wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.editorial-heading {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #f3f3f3;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.step.active {
+  background-color: #e9f5ff;
+  border-color: white;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  background-color: grey;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.step-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.step-title.active {
+  color: #007bff;
+}
+
+.step-box {
+  display: none;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+  .step-box.active-step {
+    display: block;
+    height: auto; /* Let the content define the height */
+    transition: height 0.3s ease-in-out;
+  }
+
+
+.step-image-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  width: 70%;
+  max-width: 700px;
+  height: auto;
+}
+.boxes {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 20px;
+  width: 100%;
+  z-index: 1;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.text-above-boxes {
+  position: absolute;
+  top: 50px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+}
+.box {
+  width: 22%;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid #000;
+  border-radius: 10px;
+  z-index: 1;
+  font-size: 12px;
+  padding: 10px;
+  margin-top: 100px;
+  box-sizing: border-box;
+}
+.box svg {
+  margin-bottom: 60px;
+}
+.green-line {
+  position: absolute;
+  width: 40%;
+  height: 3px;
+  background-color: green;
+  margin-top: 150px;
+}
+
+.box-number {
+  position: absolute;
+  top: 5px;
+  margin-left: -150px;
+  margin-top: 90px;
+  font-size: 10px;
+  font-weight: bold;
+  background-color: green;
+  color: blue;
+  padding: 5px;
+  border-radius: 50%;
+}
+.step-image-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  width: 70%;
+  max-width: 700px;
+  height: auto;
+}
+.box-text {
+  margin-left: 15px;
+}
+.icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.note {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  width: 90%;
+  z-index: 1;
+  box-sizing: border-box;
+}
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+}
+
+.blurred-image {
+  width: 100%;
+  height: auto;
+  filter: blur(2px);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 0;
+}
+
+.step-connector {
+  position: absolute;
+  left: 30px;
+  width: 2px;
+  border-left: 2px dotted grey;
+  height: 900px; 
+  z-index: 1;
+  top: 10%;
+}
+
