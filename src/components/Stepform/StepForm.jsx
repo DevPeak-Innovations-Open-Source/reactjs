@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./stepform.css";
 import { bg } from "../../assets";
-import ProjectDetailsForm from "../ProjectDetailsForm";
+import ProjectDetailsForm from "../../ProjectDetailsForm/ProjectDetailsForm";
 
 const StepForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
