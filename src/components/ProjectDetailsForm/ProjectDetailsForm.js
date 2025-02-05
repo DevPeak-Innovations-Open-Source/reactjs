@@ -99,7 +99,12 @@ const ProjectDetailsForm = ({ setCurrentStep }) => {
             )}
           </div>
 
-          <div className="form-row">
+          <div
+            className="form-row"
+            style={{
+              gap: "15px",
+            }}
+          >
             {[
               ["fipaSector", "FIPA Sector", sectors],
               ["geography", "Geography", geographies],
@@ -131,13 +136,27 @@ const ProjectDetailsForm = ({ setCurrentStep }) => {
           </div>
 
           <h3>Practice Areas & Sponsorship Details</h3>
-          <div className="form-row">
+          <div
+            className="form-row"
+            style={{
+              width: "98%",
+              gap: "40px",
+            }}
+          >
             {[
               ["caseCode", "Case Code"],
               ["primarySponsor", "Primary Sponsor", sponsors],
               ["deadline", "Deadline"],
             ].map(([name, label, options]) => (
-              <div className="form-group" key={name}>
+              <div
+                className="form-group"
+                key={name}
+                style={{
+                  marginLeft: name === "deadline" ? "-20px" : "0px",
+                  minWidth: name === "deadline" ? "380px" : "200px",
+                  minWidth: name === "primarySponsor" ? "380px" : "200px",
+                }}
+              >
                 <label>
                   {label}
                   <span>*</span>
@@ -232,14 +251,14 @@ const ProjectDetailsForm = ({ setCurrentStep }) => {
           <div className="form-group">
             <label>
               Target Clients <span>*</span>
-              <small className="notee">(Minimum 2 to be selected)</small>
+              <small className="notee">(Minimum 1 to be selected)</small>
             </label>
             <Field
               as="select"
               name="targetClients"
               className="form-input"
               onChange={(e) => {
-                setFieldValue("targetClients", [e.target.value]); 
+                setFieldValue("targetClients", [e.target.value]);
               }}
             >
               <option value="">Select the clients</option>
@@ -266,7 +285,7 @@ const ProjectDetailsForm = ({ setCurrentStep }) => {
                     ? "outline"
                     : "secondary"
                 }`}
-                disabled={index === 2 && !isValid} 
+                disabled={index === 2 && !isValid}
               >
                 {label}
               </button>

@@ -26,7 +26,7 @@ body {
   display: flex;
   align-items: center;
   padding: 10px 15px;
-  background-color: #f3f3f3;
+  background-color: white;
   cursor: pointer;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -35,7 +35,7 @@ body {
 }
 
 .step.active {
-  background-color: #e9f5ff;
+  background-color: white;
   border-color: white;
 }
 
@@ -73,13 +73,11 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-
-  .step-box.active-step {
-    display: block;
-    height: auto; /* Let the content define the height */
-    transition: height 0.3s ease-in-out;
-  }
-
+.step-box.active-step {
+  display: block;
+  height: auto;
+  transition: height 0.3s ease-in-out;
+}
 
 .step-image-container {
   position: relative;
@@ -139,14 +137,18 @@ body {
 
 .box-number {
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 5px;
-  margin-left: -150px;
+  margin-left: -142px;
   margin-top: 90px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: bold;
   background-color: green;
   color: blue;
-  padding: 5px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
 }
 .step-image-container {
@@ -166,6 +168,13 @@ body {
 .icon {
   width: 50px;
   height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon2 {
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -199,7 +208,7 @@ body {
 .blurred-image {
   width: 100%;
   height: auto;
-  filter: blur(2px);
+  filter: blur(4px);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -211,8 +220,7 @@ body {
   left: 30px;
   width: 2px;
   border-left: 2px dotted grey;
-  height: 900px; 
+  height: 900px;
   z-index: 1;
-  top: 10%;
+  top: 7%;
 }
-

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./stepform.css";
 import { bg } from "../../assets";
-import ProjectDetailsForm from "../../ProjectDetailsForm/ProjectDetailsForm";
+import ProjectDetailsForm from "../ProjectDetailsForm/ProjectDetailsForm";
+import PublicationForm from "../PublicationForm/PublicationForm";
 
 const StepForm = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -10,7 +11,7 @@ const StepForm = () => {
     { number: "1", text: "Pitch to Publish Guidelines" },
     { number: "2", text: "Brand and Design Guidelines", icon: true },
     { number: "3", text: "Co-Publishing Guidelines" },
-    { number: "4", text: "Editorial Guidelines Checklist" },
+    { number: "4", text: "Editorial Guidelines Checklist", icon2: true },
   ];
 
   const stepsData = [
@@ -22,13 +23,14 @@ const StepForm = () => {
           <h2 className="editorial-heading">Editorial Guidelines</h2>
           <div className="step-image-container">
             <p className="text-above-boxes">
-              Please ensure that you have read and understood the following guidelines before starting.
+              Please ensure that you have read and understood the following
+              guidelines before starting.
             </p>
             <img src={bg} alt="Guidelines" className="blurred-image" />
             <div className="boxes">
               {guidelines.map((guideline, index) => (
                 <div className="box" key={index}>
-                  {guideline.icon && (
+                  {/* {guideline.icon && (
                     <svg
                       width="20%"
                       height="20%"
@@ -50,19 +52,38 @@ const StepForm = () => {
                         />
                       </defs>
                     </svg>
-                  )}
-                  <span className="box-number">{guideline.number}</span> {guideline.text}
+                    
+                  )} */}
+                  {/* {guideline.icon2 && (
+                    <svg width="50%" height="50%" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.12915" y="0.320435" width="39.447" height="40" fill="url(#pattern67)" />
+                    <defs>
+                        <pattern id="pattern67" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlinkHref="#image0_400_2015" transform="matrix(0.01 0 0 0.00986176 0 0.00691195)" />
+                        </pattern>
+                        <image id="image0_400_2015" width="100" height="100" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVU..." />
+                    </defs>
+                </svg>
+                  )} */}
+                  <span className="box-number">{guideline.number}</span>{" "}
+                  {guideline.text}
                 </div>
               ))}
             </div>
             <p className="green-line"></p>
             <p className="note">
-              Note: It is the author team’s responsibility to ensure you have read and understood these guidelines before proceeding.
+              Note: It is the author team’s responsibility to ensure you have
+              read and understood these guidelines before proceeding.
             </p>
             <div className="checkbox-container">
-              <input type="checkbox" id="step-1-checkbox" onChange={() => setCurrentStep(2)} />
+              <input
+                type="checkbox"
+                id="step-1-checkbox"
+                onChange={() => setCurrentStep(2)}
+              />
               <label htmlFor="step-1-checkbox">
-                I confirm that I have read and understood the above guidelines before proceeding.
+                I confirm that I have read and understood the above guidelines
+                before proceeding.
               </label>
             </div>
           </div>
@@ -74,7 +95,6 @@ const StepForm = () => {
       title: "Project Details",
       content: (
         <>
-          
           <ProjectDetailsForm setCurrentStep={setCurrentStep} />
         </>
       ),
@@ -82,7 +102,11 @@ const StepForm = () => {
     {
       id: 3,
       title: "Develop Your Publication Outline",
-      content: <p>Create your publication outline.</p>,
+      content: (
+        <>
+          <PublicationForm setCurrentStep={setCurrentStep} />
+        </>
+      ),
     },
   ];
 
@@ -93,11 +117,21 @@ const StepForm = () => {
           <div key={step.id} className="step-wrapper">
             <div className={`step ${currentStep === step.id ? "active" : ""}`}>
               <div className="step-number">{step.id}</div>
-              <div className={`step-title ${currentStep === step.id ? "active" : ""}`}>{step.title}</div>
+              <div
+                className={`step-title ${
+                  currentStep === step.id ? "active" : ""
+                }`}
+              >
+                {step.title}
+              </div>
             </div>
-            
-            {index < stepsData.length - 1 && step.id < 2 && <div className="step-connector"></div>}
-            {currentStep === step.id && <div className="step-box active-step">{step.content}</div>}
+
+            {index < stepsData.length - 1 && step.id < 2 && (
+              <div className="step-connector"></div>
+            )}
+            {currentStep === step.id && (
+              <div className="step-box active-step">{step.content}</div>
+            )}
           </div>
         ))}
       </div>
