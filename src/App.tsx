@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import { triple } from "../src/assets"; // Unified imports
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Welcome from "./components/Welcome/Welcome";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Table from "./components/Table/Table";
 
-function App() {
-  const [count, setCount] = useState(0)
+import UploadPage from "./components/UploadPage/UploadPage";
+import Video from "./components/Video/Video";
+
+const App: React.FC = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app">
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
-export default App
+      <div className={`main-content ${isSidebarOpen ? "shifted" : ""}`}>
+        <header className="header">
+          <img
+            src={triple}
+            alt="Menu"
+            className="menu-btn"
+            onClick={toggleSidebar}
+          />
+          <input
+            type="text"
+            placeholder="Search"
+            className="search-box"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </header>
+
+        <Routes>
+          <Route path="/table" element={<Table searchQuery={searchQuery} />} />
+
+          <Route
+            path="/userinformation"
+            element={<Table searchQuery={searchQuery} />}
+          />
+
+          <Route path="/welcome" element={<Welcome />} />
+
+          <Route path="/upload" element={<UploadPage />} />
+
+          <Route path="/video" element={<Video />} />
+</Routes>
+      </div>
+    </div>
+  );
+};
+
+export default App;
