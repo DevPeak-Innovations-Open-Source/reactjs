@@ -1,6 +1,6 @@
 import { all } from "redux-saga/effects";
-import { watchFetchCharacters } from "./starwarSaga"; // ✅ Ensure correct import
+import { watchFetchCharacters } from "./starwarSaga"; 
 
-export default function* rootSaga() { // ✅ Default export
+export default function* rootSaga() { 
   yield all([watchFetchCharacters()]);
 }

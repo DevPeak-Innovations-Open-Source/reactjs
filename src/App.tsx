@@ -51,7 +51,7 @@ const App: React.FC = () => {
           <Route path="/upload" element={<UploadPage />} />
 
           <Route path="/video" element={<Video />} />
-</Routes>
+        </Routes>
       </div>
     </div>
   );

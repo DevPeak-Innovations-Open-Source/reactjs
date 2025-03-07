@@ -2,7 +2,7 @@ import React, { useRef, useState, useCallback } from "react";
 import "./UploadPage.css";
 import { upload, star, file, frame } from "../../assets";
 
-// Define types
+
 interface UploadedFile {
   name: string;
   size: string;
@@ -24,7 +24,7 @@ const UploadPage: React.FC = () => {
       : (size / 1024).toFixed(2) + " KB";
   };
 
-  // Add new files while preventing duplicates & exceeding the limit
+  
   const addFiles = useCallback((newFiles: File[]) => {
     setFiles((prevFiles) => {
       const uniqueFiles = newFiles.filter(
@@ -48,7 +48,7 @@ const UploadPage: React.FC = () => {
     });
   }, []);
 
-  // Handle file input change
+  
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
     const selectedFiles = Array.from(event.target.files)
@@ -56,7 +56,7 @@ const UploadPage: React.FC = () => {
     addFiles(selectedFiles);
   };
 
-  // Handle drag & drop upload
+  
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragging(false);
@@ -77,7 +77,7 @@ const UploadPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Drag & Drop Upload Box */}
+    
       <div
         className={`upload-box ${isDragging ? "dragging" : ""}`}
         onDragOver={(e) => {
@@ -107,7 +107,7 @@ const UploadPage: React.FC = () => {
         <p>Maximum file size {MAX_FILE_SIZE_MB} MB</p>
       </div>
 
-      {/* Uploaded File List */}
+      
       <div className="upload-progress">
         {files.map((file, index) => (
           <div className="file" key={file.name}>
@@ -132,7 +132,7 @@ const UploadPage: React.FC = () => {
         ))}
       </div>
 
-      {/* Buttons */}
+      
       <div className="button-group">
         <button className="cancel-btn" onClick={() => setFiles([])}>
           Cancel

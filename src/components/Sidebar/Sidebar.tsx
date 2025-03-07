@@ -39,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen,toggleSidebar }) => {
       </div>
 
       <ul className="sidebar-menu">
-        {/* User Information */}
+       
         <li
           onClick={() => toggleSection("films")}
           className={`menu-item ${sections.films ? "open" : ""}`}
@@ -66,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen,toggleSidebar }) => {
           </ul>
         )}
 
-        {/* Upload Section */}
+       
         <li
           onClick={() => toggleSection("people")}
           className={`menu-item ${sections.people ? "open" : ""}`}
@@ -85,7 +85,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen,toggleSidebar }) => {
           </ul>
         )}
 
-        {/* Video Section */}
+        
         <li
           onClick={() => toggleSection("planets")}
           className={`menu-item ${sections.planets ? "open" : ""}`}
