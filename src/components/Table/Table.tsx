@@ -5,8 +5,8 @@ import {
   vector1, lockSimple, frame3
 } from "../../assets";
 import { useDispatch, useSelector } from "react-redux"; 
-import { fetchCharactersRequest } from "../../store/slices/starwarSlice"; // ✅ Import Redux Action
-import { RootState } from "../../store/store"; // ✅ Import RootState
+import { fetchCharactersRequest } from "../../store/slices/starwarSlice"; 
+import { RootState } from "../../store/store";
 
 interface TableProps {
   searchQuery: string;
@@ -21,7 +21,7 @@ interface User {
 
 const Table: React.FC<TableProps> = ({ searchQuery }) => {
   const dispatch = useDispatch();
-  const { characters, loading, error } = useSelector((state: RootState) => state.starwar); // ✅ Get data from Redux
+  const { characters, loading, error } = useSelector((state: RootState) => state.starwar);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState<Record<number, boolean>>({});
   const [users, setUsers] = useState<User[]>([]);
