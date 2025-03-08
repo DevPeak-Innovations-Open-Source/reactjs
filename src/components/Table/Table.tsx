@@ -53,7 +53,7 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
       dispatch(fetchCharactersRequest());
     }
   }, [dispatch, characters.length]);
-  
+
 const toggleDropdown = useCallback((index: number) => {
     setDropdownOpen((prev) => ({ ...prev, [index]: !prev[index] }));
   }, []);
