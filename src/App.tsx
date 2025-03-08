@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { triple } from "../src/assets"; // Unified imports
+import { triple } from "../src/assets"; 
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome/Welcome";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Table from "./components/Table/Table";
-
 import UploadPage from "./components/UploadPage/UploadPage";
 import Video from "./components/Video/Video";
+import AddUser from "./components/AddUser/AddUser";
 
 const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -51,6 +51,7 @@ const App: React.FC = () => {
           <Route path="/upload" element={<UploadPage />} />
 
           <Route path="/video" element={<Video />} />
+          <Route path="/adduser" element={<AddUser />} />
         </Routes>
       </div>
     </div>

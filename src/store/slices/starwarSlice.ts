@@ -28,15 +28,19 @@ const starwarSlice = createSlice({
     },
     fetchCharactersSuccess: (state, action: PayloadAction<StarwarCharacter[]>) => {
       state.loading = false;
-      state.characters = action.payload;
+      state.characters = [...state.characters, ...action.payload]; 
     },
+    
     fetchCharactersFailure: (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload;
     },
+    addCharacter: (state, action: PayloadAction<StarwarCharacter>) => {
+      state.characters.push(action.payload);
+    },
   },
 });
 
-export const { fetchCharactersRequest, fetchCharactersSuccess, fetchCharactersFailure } =
+export const { fetchCharactersRequest, fetchCharactersSuccess, fetchCharactersFailure,addCharacter } =
   starwarSlice.actions;
 export default starwarSlice.reducer;

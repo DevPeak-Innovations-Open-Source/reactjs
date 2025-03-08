@@ -5,7 +5,7 @@ export { default as UploadPage } from "../components/UploadPage/UploadPage";
 export { default as Video } from "../components/Video/Video";
 
 
-
+export { default as userIllustration } from "./user-illustration.png"
 export { default as arrowIcon } from "./arrowIcon.png";
 export { default as file } from "./file.png";
 export { default as fileIcon } from "./fileIcon.png";

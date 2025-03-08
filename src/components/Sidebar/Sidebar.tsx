@@ -3,13 +3,12 @@ import { Link, Outlet } from "react-router-dom";
 import "./Sidebar.css";
 import { logo, fileIcon, arrowIcon, filmsImage } from "../../assets";
 
-
 interface SidebarProps {
   isOpen: boolean;
   toggleSidebar: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen,toggleSidebar }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   const [sections, setSections] = useState<Record<string, boolean>>({
     films: false,
     people: false,
@@ -29,7 +28,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen,toggleSidebar }) => {
 
   return (
     <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
-     
       <div className="sidebar-header">
         <img
           src={logo}
@@ -39,16 +37,28 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen,toggleSidebar }) => {
       </div>
 
       <ul className="sidebar-menu">
-       
         <li
           onClick={() => toggleSection("films")}
           className={`menu-item ${sections.films ? "open" : ""}`}
         >
-          <img src={fileIcon} alt="File Icon" className={`icon ${isOpen ? "" : "closed"}`} />
-          <Link to="/userinformation" className={`title ${sections.films ? "open-title" : ""} ${!isOpen ? "closed" : ""}`}>
+          <img
+            src={fileIcon}
+            alt="File Icon"
+            className={`icon ${isOpen ? "" : "closed"}`}
+          />
+          <Link
+            to="/userinformation"
+            className={`title ${sections.films ? "open-title" : ""} ${
+              !isOpen ? "closed" : ""
+            }`}
+          >
             User Information
           </Link>
-          <img src={arrowIcon} alt="Arrow" className={`arrow ${sections.films ? "open" : ""}`} />
+          <img
+            src={arrowIcon}
+            alt="Arrow"
+            className={`arrow ${sections.films ? "open" : ""}`}
+          />
         </li>
 
         {sections.films && (
@@ -60,22 +70,34 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen,toggleSidebar }) => {
             </li>
             <li className="subtitle">
               <img src={filmsImage} alt="Movie Logo" className="movie-logo" />
-              Movie 2
+              <Link to="/adduser">Add a user</Link>
               <img src={arrowIcon} alt="Arrow" className="arrow" />
             </li>
           </ul>
         )}
 
-       
         <li
           onClick={() => toggleSection("people")}
           className={`menu-item ${sections.people ? "open" : ""}`}
         >
-          <img src={fileIcon} alt="File Icon" className={`icon ${isOpen ? "" : "closed"}`} />
-          <Link to="/upload" className={`title ${sections.people ? "open-title" : ""} ${!isOpen ? "closed" : ""}`}>
+          <img
+            src={fileIcon}
+            alt="File Icon"
+            className={`icon ${isOpen ? "" : "closed"}`}
+          />
+          <Link
+            to="/upload"
+            className={`title ${sections.people ? "open-title" : ""} ${
+              !isOpen ? "closed" : ""
+            }`}
+          >
             Upload
           </Link>
-          <img src={arrowIcon} alt="Arrow" className={`arrow ${sections.people ? "open" : ""}`} />
+          <img
+            src={arrowIcon}
+            alt="Arrow"
+            className={`arrow ${sections.people ? "open" : ""}`}
+          />
         </li>
 
         {sections.people && (
@@ -85,16 +107,28 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen,toggleSidebar }) => {
           </ul>
         )}
 
-        
         <li
           onClick={() => toggleSection("planets")}
           className={`menu-item ${sections.planets ? "open" : ""}`}
         >
-          <img src={fileIcon} alt="File Icon" className={`icon ${isOpen ? "" : "closed"}`} />
-          <Link to="/video" className={`title ${sections.planets ? "open-title" : ""} ${!isOpen ? "closed" : ""}`}>
+          <img
+            src={fileIcon}
+            alt="File Icon"
+            className={`icon ${isOpen ? "" : "closed"}`}
+          />
+          <Link
+            to="/video"
+            className={`title ${sections.planets ? "open-title" : ""} ${
+              !isOpen ? "closed" : ""
+            }`}
+          >
             Video
           </Link>
-          <img src={arrowIcon} alt="Arrow" className={`arrow ${sections.planets ? "open" : ""}`} />
+          <img
+            src={arrowIcon}
+            alt="Arrow"
+            className={`arrow ${sections.planets ? "open" : ""}`}
+          />
         </li>
 
         {sections.planets && (
