@@ -54,7 +54,7 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
     }
   }, [dispatch, characters.length]);
 
-const toggleDropdown = useCallback((index: number) => {
+  const toggleDropdown = useCallback((index: number) => {
     setDropdownOpen((prev) => ({ ...prev, [index]: !prev[index] }));
   }, []);
 
@@ -64,21 +64,19 @@ const toggleDropdown = useCallback((index: number) => {
     );
   }, [characters, searchQuery]);
 
-  const dropdownItems = useMemo(
-    () => [
-      { icon: vector, title: "View" },
-      { icon: frame, title: "Download" },
-      { icon: frame1, title: "Rename" },
-      { icon: frame2, title: "Share Link" },
-      { icon: vector1, title: "Move" },
-      { icon: lockSimple, title: "Mark Private" },
-      { icon: frame3, title: "Delete", className: "delete" },
-    ],
-    []
-  );
+  const dropdownItems = [
+    { icon: vector, title: "View" },
+    { icon: frame, title: "Download" },
+    { icon: frame1, title: "Rename" },
+    { icon: frame2, title: "Share Link" },
+    { icon: vector1, title: "Move" },
+    { icon: lockSimple, title: "Mark Private" },
+    { icon: frame3, title: "Delete", className: "delete" },
+  ];
+
   const allUsers = useSelector((state: RootState) => state.starwar.characters);
 
-  const sortedFilteredUsers = useMemo(() => {
+  const sortedFilteredUsers: any[] = useMemo(() => {
     return [...allUsers]
       .filter((user) =>
         user.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -95,10 +93,6 @@ const toggleDropdown = useCallback((index: number) => {
     setSortDropdownOpen(false);
   };
 
-  const toggleSort = () => {
-    setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
-  };
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -106,6 +100,7 @@ const toggleDropdown = useCallback((index: number) => {
     <div className="table-container">
       <div className="table-header">
         <div className="table-heading">Users</div>
+
         <div className="header-controls">
           <div className="sort-container">
             <button
@@ -116,38 +111,38 @@ const toggleDropdown = useCallback((index: number) => {
             </button>
             {sortDropdownOpen && (
               <div className="sort-dropdown">
-                <button onClick={() => handleSort("asc")}>Ascending </button>
-                <button onClick={() => handleSort("desc")}>Descending </button>
+                <button onClick={() => handleSort("asc")}>Ascending</button>
+                <button onClick={() => handleSort("desc")}>Descending</button>
               </div>
             )}
           </div>
-        </div>
 
-        <div
-          className="toggle-button"
-          onClick={() => setView(view === "list" ? "grid" : "list")}
-        >
-          {view === "list" ? (
-            <>
-              <img src={listIcon2} alt="List Icon" className="toggle-icon" />
-              <span className="list-text">List</span>
-              <img
-                src={listIcon1}
-                alt="Grid Icon"
-                className="toggle-icon secondary-icon"
-              />
-            </>
-          ) : (
-            <>
-              <img src={listIcon1} alt="Grid Icon" className="toggle-icon" />
-              <span className="list-text">Grid</span>
-              <img
-                src={listIcon2}
-                alt="List Icon"
-                className="toggle-icon secondary-icon"
-              />
-            </>
-          )}
+          <div
+            className="toggle-button"
+            onClick={() => setView(view === "list" ? "grid" : "list")}
+          >
+            {view === "list" ? (
+              <>
+                <img src={listIcon2} alt="List Icon" className="toggle-icon" />
+                <span className="list-text">List</span>
+                <img
+                  src={listIcon1}
+                  alt="Grid Icon"
+                  className="toggle-icon secondary-icon"
+                />
+              </>
+            ) : (
+              <>
+                <img src={listIcon1} alt="Grid Icon" className="toggle-icon" />
+                <span className="list-text">Grid</span>
+                <img
+                  src={listIcon2}
+                  alt="List Icon"
+                  className="toggle-icon secondary-icon"
+                />
+              </>
+            )}
+          </div>
         </div>
       </div>
 

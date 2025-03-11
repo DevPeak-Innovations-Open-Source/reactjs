@@ -21,24 +21,5 @@ body, html {
     } 
     
     
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px;
-      background-color: #03123B;
-      color: #fff;
-      
-    }
-    
-    .search-box {
-      width: 100px; 
-      height: 20px;  
-      padding: 5px 5px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      outline: none;
-    }
-    
    
+    

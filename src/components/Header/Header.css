@@ -1,0 +1,41 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #03123b;
+    color: white;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto; 
+    cursor: white;
+}
+
+.search-box {
+    padding: 8px 35px;
+    background-color: #03123b;
+    color:white;
+    border: 1px solid white;
+    border-radius: 5px;
+    outline: none;
+    background-color: #03123b;
+    width: 150px; 
+    transition: width 0.3s ease-in-out;
+    
+}
+
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    color:white;
+}
+.search-input {
+    caret-color: white; 
+    color: white; 
+  }
+  

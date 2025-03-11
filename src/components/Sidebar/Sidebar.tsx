@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
 import "./Sidebar.css";
-import { logo, fileIcon, arrowIcon, filmsImage } from "../../assets";
+import { triple, logo, fileIcon, arrowIcon, filmsImage } from "../../assets";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -17,7 +17,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
     starships: false,
     vehicles: false,
   });
+  const [activeItem, setActiveItem] = useState<string | null>(null);
 
+  const handleMenuClick = (section: keyof typeof sections) => {
+    setActiveItem(section);
+    toggleSection(section);
+  };
   useEffect(() => {
     console.log("Sidebar state:", sections);
   }, [sections]);
@@ -28,6 +33,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
 
   return (
     <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
+      <img
+        src={triple}
+        alt="Menu"
+        className="menu-btn"
+        onClick={toggleSidebar}
+      />
+
       <div className="sidebar-header">
         <img
           src={logo}
@@ -38,8 +50,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
 
       <ul className="sidebar-menu">
         <li
-          onClick={() => toggleSection("films")}
-          className={`menu-item ${sections.films ? "open" : ""}`}
+          onClick={() => {
+            handleMenuClick("films");
+          }}
+          className={`menu-item ${sections.films ? "open" : ""} ${
+            activeItem === "films" ? "active" : ""
+          }`}
         >
           <img
             src={fileIcon}
@@ -77,8 +93,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
         )}
 
         <li
-          onClick={() => toggleSection("people")}
-          className={`menu-item ${sections.people ? "open" : ""}`}
+          onClick={() => handleMenuClick("people")}
+          className={`menu-item ${activeItem === "people" ? "active" : ""}`}
         >
           <img
             src={fileIcon}
@@ -108,8 +124,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
         )}
 
         <li
-          onClick={() => toggleSection("planets")}
-          className={`menu-item ${sections.planets ? "open" : ""}`}
+          onClick={() => handleMenuClick("planets")}
+          className={`menu-item ${activeItem === "planets" ? "active" : ""}`}
         >
           <img
             src={fileIcon}

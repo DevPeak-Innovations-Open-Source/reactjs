@@ -186,7 +186,7 @@
   .close-btn {
     position: absolute;
     top: 10%;
-    right: -10px;
+   left: 230px;
     transform: translateY(-50%);
     background-color: transparent;
     border: none;

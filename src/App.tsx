@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { triple } from "../src/assets"; 
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome/Welcome";
@@ -8,6 +7,7 @@ import Table from "./components/Table/Table";
 import UploadPage from "./components/UploadPage/UploadPage";
 import Video from "./components/Video/Video";
 import AddUser from "./components/AddUser/AddUser";
+import Header from "./components/Header/Header";
 
 const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -22,21 +22,7 @@ const App: React.FC = () => {
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       <div className={`main-content ${isSidebarOpen ? "shifted" : ""}`}>
-        <header className="header">
-          <img
-            src={triple}
-            alt="Menu"
-            className="menu-btn"
-            onClick={toggleSidebar}
-          />
-          <input
-            type="text"
-            placeholder="Search"
-            className="search-box"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </header>
+        <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
         <Routes>
           <Route path="/table" element={<Table searchQuery={searchQuery} />} />
