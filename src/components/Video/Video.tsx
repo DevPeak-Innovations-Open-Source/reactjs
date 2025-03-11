@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { nature } from "../../assets";
-import "./video.css";
+import "./Video.css";
 
 const VideoPlayer: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);

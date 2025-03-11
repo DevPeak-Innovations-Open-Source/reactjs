@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, Outlet } from "react-router-dom";
-import "./Sidebar.css";
 import { triple, logo, fileIcon, arrowIcon, filmsImage } from "../../assets";
+import "./Sidebar.css";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -9,75 +9,98 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
-  const [sections, setSections] = useState<Record<string, boolean>>({
-    films: false,
-    people: false,
-    planets: false,
-    species: false,
-    starships: false,
-    vehicles: false,
-  });
-  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const [toggleindex, setToggleIndex] = useState<any>(null);
 
-  const handleMenuClick = (section: keyof typeof sections) => {
-    setActiveItem(section);
-    toggleSection(section);
+  const sidebarArr: any[] = [
+    {
+      imgSrc: fileIcon,
+      link: "/userinformation",
+      linkText: "User Information",
+      subArr: [
+        {
+          imgSrc: fileIcon,
+          link: "/userinformation",
+          linkText: "User Information",
+        },
+        {
+          imgSrc: fileIcon,
+          link: "/userinformation",
+          linkText: "User Information",
+        },
+      ],
+    },
+    {
+      imgSrc: fileIcon,
+      link: "/userinformation",
+      linkText: "User Information",
+      subArr: [],
+    },
+    {
+      imgSrc: fileIcon,
+      link: "/userinformation",
+      linkText: "User Information",
+      subArr: [],
+    },
+    {
+      imgSrc: fileIcon,
+      link: "/userinformation",
+      linkText: "User Information",
+      subArr: [],
+    },
+    {
+      imgSrc: fileIcon,
+      link: "/userinformation",
+      linkText: "User Information",
+      subArr: [],
+    },
+    {
+      imgSrc: fileIcon,
+      link: "/userinformation",
+      linkText: "User Information",
+      subArr: [],
+    },
+    {
+      imgSrc: fileIcon,
+      link: "/userinformation",
+      linkText: "User Information",
+      subArr: [],
+    },
+  ];
+
+  const handleMenuClick = (indexToggled: number) => {
+    if(toggleindex === indexToggled) {
+      setToggleIndex(null);
+    } else {
+      setToggleIndex(indexToggled);
+    }
   };
-  useEffect(() => {
-    console.log("Sidebar state:", sections);
-  }, [sections]);
 
-  const toggleSection = (section: keyof typeof sections) => {
-    setSections((prev) => ({ ...prev, [section]: !prev[section] }));
-  };
 
-  return (
-    <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
-      <img
-        src={triple}
-        alt="Menu"
-        className="menu-btn"
-        onClick={toggleSidebar}
-      />
+  const renderSideBar = (item: any, index: number) => {
+    const isOpenSub: boolean = index === toggleindex;
 
-      <div className="sidebar-header">
-        <img
-          src={logo}
-          alt="Logo"
-          className={`sidebar-logo ${isOpen ? "" : "closed"}`}
-        />
-      </div>
-
-      <ul className="sidebar-menu">
-        <li
+    return (
+      <>
+        <li key={index}
           onClick={() => {
-            handleMenuClick("films");
-          }}
-          className={`menu-item ${sections.films ? "open" : ""} ${
-            activeItem === "films" ? "active" : ""
-          }`}
-        >
-          <img
-            src={fileIcon}
-            alt="File Icon"
-            className={`icon ${isOpen ? "" : "closed"}`}
-          />
-          <Link
-            to="/userinformation"
-            className={`title ${sections.films ? "open-title" : ""} ${
-              !isOpen ? "closed" : ""
-            }`}
-          >
-            User Information
-          </Link>
-          <img
-            src={arrowIcon}
-            alt="Arrow"
-            className={`arrow ${sections.films ? "open" : ""}`}
-          />
+            handleMenuClick(index);
+          }} className={`menu-item`}>
+          <div className="menu-item-area">
+            <img src={item.imgSrc} className="menu-item-icon" alt="File Icon" />
+            {isOpen && <Link to={item.link}>{item.linkText}</Link>}
+          </div>
+          <img src={arrowIcon} alt="Arrow" />
         </li>
+        {isOpenSub &&
+          <ul className="submenu-sidebar-menu">
+            {item?.subArr?.map(renderSideBar)}
+          </ul>}
+      </>
+    )
+  }
 
-        {sections.films && (
+  /*
+  {sections.films && (
           <ul className="submenu">
             <li className="subtitle">
               <img src={filmsImage} alt="Movie Logo" className="movie-logo" />
@@ -103,9 +126,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
           />
           <Link
             to="/upload"
-            className={`title ${sections.people ? "open-title" : ""} ${
-              !isOpen ? "closed" : ""
-            }`}
+            className={`title ${sections.people ? "open-title" : ""} ${!isOpen ? "closed" : ""
+              }`}
           >
             Upload
           </Link>
@@ -134,9 +156,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
           />
           <Link
             to="/video"
-            className={`title ${sections.planets ? "open-title" : ""} ${
-              !isOpen ? "closed" : ""
-            }`}
+            className={`title ${sections.planets ? "open-title" : ""} ${!isOpen ? "closed" : ""
+              }`}
           >
             Video
           </Link>
@@ -153,6 +174,27 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
             <li className="subtitle">Planet 2</li>
           </ul>
         )}
+   */
+
+  return (
+    <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
+      <div className="sidebar-header">
+        {isOpen && <img
+          src={logo}
+          alt="Logo"
+          className={`sidebar-logo`}
+        />}
+        <img
+          src={triple}
+          alt="Menu"
+          className="menu-btn"
+          onClick={toggleSidebar}
+        />
+      </div>
+
+      {/** TODO @desc Use map to render your sidebar and it's subarr */}
+      <ul className="sidebar-menu">
+        {sidebarArr.map(renderSideBar)}
       </ul>
       <Outlet />
     </div>
