@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import "./Sidebar.css";
-import { triple, logo, fileIcon, arrowIcon, filmsImage } from "../../assets";
+import { triple, logo, fileIcon, arrowIcon } from "../../assets";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -9,7 +9,7 @@ interface SidebarProps {
 }
 
 interface MenuItem {
-  key: string;
+  key: number;
   label: string;
   link?: string;
   subLinks?: MenuItem[];
@@ -17,84 +17,99 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
-    key: "films",
+    key: 0,
     label: "User Information",
     link: "/userinformation",
     subLinks: [
-      { key: "welcome", label: "Welcome", link: "/welcome" },
-      { key: "adduser", label: "Add a user", link: "/adduser" },
+      { key: 1, label: "Welcome", link: "/welcome" },
+      { key: 2, label: "Add a user", link: "/adduser" },
     ],
   },
   {
-    key: "people",
+    key: 3,
     label: "Upload",
     link: "/upload",
     subLinks: [
-      { key: "person1", label: "Person 1" },
-      { key: "person2", label: "Person 2" },
+      { key: 4, label: "Person 1", link: "/person1" },
+      { key: 5, label: "Person 2", link: "/person2" },
     ],
   },
   {
-    key: "planets",
+    key: 6,
     label: "Video",
     link: "/video",
     subLinks: [
-      { key: "planet1", label: "Planet 1" },
-      { key: "planet2", label: "Planet 2" },
+      { key: 7, label: "Planet 1", link: "/planet1" },
+      { key: 8, label: "Planet 2", link: "/planet2" },
     ],
   },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
-  const [sections, setSections] = useState<Record<string, boolean>>({
-    films: false,
-    people: false,
-    planets: false,
-  });
-  const [activeItem, setActiveItem] = useState<string | null>(null);
+  const [activeItem, setActiveItem] = useState<number | null>(null);
 
-  const handleMenuClick = (section: string) => {
-    setActiveItem(section);
-    setSections((prev) => ({ ...prev, [section]: !prev[section] }));
+  const handleMenuClick = (key: number) => {
+    setActiveItem(activeItem === key ? null : key);
   };
 
-  const renderMenuItems = (items: MenuItem[]) => {
-    return items.map(({ key, label, link, subLinks }) => (
-      <React.Fragment key={key}>
-        <li
-          className={`menu-item ${sections[key] ? "open" : ""} ${activeItem === key ? "active" : ""}`}
-          onClick={() => handleMenuClick(key)}
+  const renderSidebar = (item: MenuItem, isSubArr = false) => {
+    const isOpenSub = activeItem === item.key;
+
+    return (
+      <li
+        key={item.key}
+        className={`menu-item ${activeItem === item.key ? "active" : ""} ${
+          isSubArr ? "submenu-item" : ""
+        }`}
+      >
+        <Link
+          to={item.link || "#"}
+          className={`menu-item-area ${
+            activeItem === item.key ? "active" : ""
+          }`}
+          onClick={() => handleMenuClick(item.key)}
         >
-          <img src={fileIcon} alt="File Icon" className={`icon ${isOpen ? "" : "closed"}`} />
-          <Link to={link || "#"} className={`title ${sections[key] ? "open-title" : ""} ${!isOpen ? "closed" : ""}`}>
-            {label}
-          </Link>
-          {subLinks && <img src={arrowIcon} alt="Arrow" className={`arrow ${sections[key] ? "open" : ""}`} />}
-        </li>
-        {sections[key] && subLinks && (
+          <img src={fileIcon} className="menu-icon" alt="File Icon" />
+
+          {isOpen && <span className="menu-text">{item.label}</span>}
+
+          {item.subLinks && (
+            <img
+              src={arrowIcon}
+              className={`arrow-icon ${isOpenSub ? "rotate" : ""}`}
+              alt="Arrow Icon"
+            />
+          )}
+        </Link>
+
+        {isOpenSub && item.subLinks && (
           <ul className="submenu">
-            {subLinks.map(({ key, label, link }) => (
-              <li className="subtitle" key={key}>
-                <img src={filmsImage} alt="Movie Logo" className="movie-logo" />
-                {link ? <Link to={link}>{label}</Link> : label}
-                <img src={arrowIcon} alt="Arrow" className="arrow" />
-              </li>
-            ))}
+            {item.subLinks.map((subItem) => renderSidebar(subItem, true))}
           </ul>
         )}
-      </React.Fragment>
-    ));
+      </li>
+    );
   };
 
   return (
     <div className={`sidebar ${isOpen ? "open" : "closed"}`}>
-      <img src={triple} alt="Menu" className="menu-btn" onClick={toggleSidebar} />
-
       <div className="sidebar-header">
-        <img src={logo} alt="Logo" className={`sidebar-logo ${isOpen ? "" : "closed"}`} />
+        <img
+          src={triple}
+          alt="Menu"
+          className="menu-btn"
+          onClick={toggleSidebar}
+        />
+        <img
+          src={logo}
+          alt="Logo"
+          className={`sidebar-logo ${isOpen ? "" : "closed"}`}
+        />
       </div>
 
-      <ul className="sidebar-menu">{renderMenuItems(menuItems)}</ul>
+      <ul className="sidebar-menu">
+        {menuItems.map((item, index) => renderSidebar(item))}
+      </ul>
 
       <Outlet />
     </div>
