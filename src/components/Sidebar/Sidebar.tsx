@@ -30,8 +30,8 @@ const menuItems: MenuItem[] = [
     label: "Upload",
     link: "/upload",
     subLinks: [
-      { key: 4, label: "Person 1", link: "/person1" },
-      { key: 5, label: "Person 2", link: "/person2" },
+      { key: 4, label: "Person 1"},
+      { key: 5, label: "Person 2"},
     ],
   },
   {
@@ -39,8 +39,8 @@ const menuItems: MenuItem[] = [
     label: "Video",
     link: "/video",
     subLinks: [
-      { key: 7, label: "Planet 1", link: "/planet1" },
-      { key: 8, label: "Planet 2", link: "/planet2" },
+      { key: 7, label: "Planet 1"},
+      { key: 8, label: "Planet 2"},
     ],
   },
 ];
