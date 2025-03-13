@@ -1,6 +1,8 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import "./UploadPage.css";
-import { upload, star, file, frame } from "../../assets";
+import { star } from "../../assets";
+import DragDropUpload from "./DragDropUpload";
+import FileItem from "./FileItem";
 
 interface UploadedFile {
   name: string;
@@ -17,68 +19,27 @@ const formatFileSize = (size: number): string => {
     : (size / 1024).toFixed(2) + " KB";
 };
 
-const processFiles = (
-  fileList: File[],
-  prevFiles: UploadedFile[]
-): UploadedFile[] => {
-  const uniqueFiles = fileList.filter(
-    (file) => !prevFiles.some((f) => f.name === file.name)
-  );
-
-  if (uniqueFiles.length < fileList.length) {
-    alert("Some files were duplicates and were not added.");
-  }
-
-  if (prevFiles.length + uniqueFiles.length > MAX_FILES) {
-    alert(`You can only upload a maximum of ${MAX_FILES} files.`);
-    return prevFiles;
-  }
-
-  return [
-    ...prevFiles,
-    ...uniqueFiles.map((file) => ({
-      name: file.name,
-      size: formatFileSize(file.size),
-      progress: 100,
-    })),
-  ];
-};
-
 const UploadPage: React.FC = () => {
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [files, setFiles] = useState<UploadedFile[]>([]);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
 
   const addFiles = useCallback((newFiles: File[]) => {
-    setFiles((prevFiles) => processFiles(newFiles, prevFiles));
+    setFiles((prevFiles) => {
+      const existingNames = new Set(prevFiles.map((file) => file.name));
+
+      const filteredFiles = newFiles
+        .filter((file) => !existingNames.has(file.name))
+        .slice(0, MAX_FILES - prevFiles.length);
+
+      return [
+        ...prevFiles,
+        ...filteredFiles.map((file) => ({
+          name: file.name,
+          size: formatFileSize(file.size),
+          progress: 100,
+        })),
+      ];
+    });
   }, []);
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) return;
-    const selectedFiles = Array.from(event.target.files).filter(
-      (file) => file.size <= MAX_FILE_SIZE_MB * 1024 * 1024
-    );
-    addFiles(selectedFiles);
-  };
-
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    if (!isDragging) setIsDragging(true);
-  };
-
-  const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    if (isDragging) setIsDragging(false);
-  };
-
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    setIsDragging(false);
-    const droppedFiles = Array.from(event.dataTransfer.files).filter(
-      (file) => file.size <= MAX_FILE_SIZE_MB * 1024 * 1024
-    );
-    addFiles(droppedFiles);
-  };
 
   return (
     <div className="upload-container">
@@ -92,78 +53,26 @@ const UploadPage: React.FC = () => {
         </div>
       </div>
 
-      <div
-        className={`upload-box ${isDragging ? "dragging" : ""}`}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        onDragLeave={handleDragLeave}
-      >
-        <div className="image-container">
-          <img src={upload} alt="upload" className="absolute-image" />
-          <img src={file} alt="upload" className="relative-image" />
-        </div>
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: "none" }}
-          multiple
-          onChange={handleFileUpload}
-        />
-        <p>
-          <span
-            className="click-upload"
-            onClick={() => fileInputRef.current?.click()}
-          >
-            Click to upload
-          </span>{" "}
-          or drag and drop files below
-        </p>
-        <p>Maximum file size {MAX_FILE_SIZE_MB} MB</p>
-      </div>
+     
+      <DragDropUpload onFilesAdded={addFiles} maxSizeMB={MAX_FILE_SIZE_MB} />
 
+      
       <div className="upload-progress">
-        {files.map((file, index) => (
-          <div className="file" key={file.name}>
-            <div className="file-left">
-              <img
-                src={frame}
-                alt="File Thumbnail"
-                className="file-thumbnail"
-              />
-            </div>
-            <div className="file-info">
-              <span className="file-name">{file.name}</span>
-              <span className="file-size">{file.size}</span>
-            </div>
-            <div className="progress-container">
-              <div
-                className={`progress-bar ${
-                  file.progress === 100 ? "full" : "partial"
-                }`}
-                style={{ width: `${file.progress}%` }}
-              ></div>
-              <span className="progress-percentage">{file.progress}%</span>
-            </div>
-            <button
-              className="close-btn"
-              onClick={() =>
-                setFiles((prev) => prev.filter((_, i) => i !== index))
-              }
-            >
-              ✕
-            </button>
-          </div>
-        ))}
+        {files.length > 0 ? (
+          files.map((file, index) => (
+            <FileItem key={file.name} file={file} onRemove={() =>
+              setFiles((prev) => prev.filter((_, i) => i !== index))
+            }/>
+          ))
+        ) : (
+          <p className="no-files">No files uploaded.</p>
+        )}
       </div>
 
+      
       <div className="button-group">
-        <button className="cancel-btn" onClick={() => setFiles([])}>
-          Cancel
-        </button>
-        <button
-          className="attach-btn"
-          onClick={() => fileInputRef.current?.click()}
-        >
+        <button className="cancel-btn" onClick={() => setFiles([])}>Cancel</button>
+        <button className="attach-btn" onClick={() => document.querySelector<HTMLInputElement>('input[type="file"]')?.click()}>
           Attach files
         </button>
       </div>
