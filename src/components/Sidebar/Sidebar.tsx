@@ -9,7 +9,7 @@ interface SidebarProps {
 }
 
 interface MenuItem {
-  key: number;
+  
   label: string;
   link?: string;
   subLinks?: MenuItem[];
@@ -17,30 +17,30 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
-    key: 0,
+    
     label: "User Information",
     link: "/userinformation",
     subLinks: [
-      { key: 1, label: "Welcome", link: "/welcome" },
-      { key: 2, label: "Add a user", link: "/adduser" },
+      {  label: "Welcome", link: "/welcome" },
+      {    label: "Add a user", link: "/adduser" },
     ],
   },
   {
-    key: 3,
+  
     label: "Upload",
     link: "/upload",
     subLinks: [
-      { key: 4, label: "Person 1" },
-      { key: 5, label: "Person 2" },
+      {  label: "Person 1" },
+      {  label: "Person 2" },
     ],
   },
   {
-    key: 6,
+    
     label: "Video",
     link: "/video",
     subLinks: [
-      { key: 7, label: "Planet 1" },
-      { key: 8, label: "Planet 2" },
+      {  label: "Planet 1" },
+      {  label: "Planet 2" },
     ],
   },
 ];
@@ -56,15 +56,16 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   const renderSidebar = (items: MenuItem[], isSubArr = false) => {
     return (
       <ul className={isSubArr ? "submenu" : "sidebar-menu"}>
-        {items.map((item) => {
-          const isOpenSub = activeItem === item.key;
+        {items.map((item,index) => {
+          const key=index+1;
+          const isOpenSub = activeItem === key;
 
           return (
-            <li key={item.key} className={`menu-item ${isOpenSub ? "active" : ""} ${isSubArr ? "submenu-item" : ""}`}>
+            <li key={key} className={`menu-item ${isOpenSub ? "active" : ""} ${isSubArr ? "submenu-item" : ""}`}>
               <Link
                 to={item.link || "#"}
                 className={`menu-item-area ${isOpenSub ? "active" : ""}`}
-                onClick={() => handleMenuClick(item.key)}
+                onClick={() => handleMenuClick(key)}
               >
                 <img src={fileIcon} className="menu-icon" alt="File Icon" />
                 {isOpen && <span className="menu-text">{item.label}</span>}
