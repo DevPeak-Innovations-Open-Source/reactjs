@@ -2,66 +2,81 @@ import React, { useRef, useState, useCallback } from "react";
 import "./UploadPage.css";
 import { upload, star, file, frame } from "../../assets";
 
-
 interface UploadedFile {
   name: string;
   size: string;
   progress: number;
 }
 
-const MAX_FILES = 2; 
-const MAX_FILE_SIZE_MB = 50; 
+const MAX_FILES = 2;
+const MAX_FILE_SIZE_MB = 50;
+
+const formatFileSize = (size: number): string => {
+  return size > 1024 * 1024
+    ? (size / (1024 * 1024)).toFixed(2) + " MB"
+    : (size / 1024).toFixed(2) + " KB";
+};
+
+const processFiles = (
+  fileList: File[],
+  prevFiles: UploadedFile[]
+): UploadedFile[] => {
+  const uniqueFiles = fileList.filter(
+    (file) => !prevFiles.some((f) => f.name === file.name)
+  );
+
+  if (uniqueFiles.length < fileList.length) {
+    alert("Some files were duplicates and were not added.");
+  }
+
+  if (prevFiles.length + uniqueFiles.length > MAX_FILES) {
+    alert(`You can only upload a maximum of ${MAX_FILES} files.`);
+    return prevFiles;
+  }
+
+  return [
+    ...prevFiles,
+    ...uniqueFiles.map((file) => ({
+      name: file.name,
+      size: formatFileSize(file.size),
+      progress: 100,
+    })),
+  ];
+};
 
 const UploadPage: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
-  // Format file size
-  const formatFileSize = (size: number): string => {
-    return size > 1024 * 1024
-      ? (size / (1024 * 1024)).toFixed(2) + " MB"
-      : (size / 1024).toFixed(2) + " KB";
-  };
-
-  
   const addFiles = useCallback((newFiles: File[]) => {
-    setFiles((prevFiles) => {
-      const uniqueFiles = newFiles.filter(
-        (file) => !prevFiles.some((f) => f.name === file.name)
-      );
-
-      if (uniqueFiles.length < newFiles.length) {
-        alert("Some files were duplicates and were not added.");
-      }
-
-      if (prevFiles.length + uniqueFiles.length > MAX_FILES) {
-        alert(`You can only upload a maximum of ${MAX_FILES} files.`);
-        return prevFiles;
-      }
-
-      return [...prevFiles, ...uniqueFiles.map((file) => ({
-        name: file.name,
-        size: formatFileSize(file.size),
-        progress: 100,
-      }))];
-    });
+    setFiles((prevFiles) => processFiles(newFiles, prevFiles));
   }, []);
 
-  
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
-    const selectedFiles = Array.from(event.target.files)
-      .filter((file) => file.size <= MAX_FILE_SIZE_MB * 1024 * 1024);
+    const selectedFiles = Array.from(event.target.files).filter(
+      (file) => file.size <= MAX_FILE_SIZE_MB * 1024 * 1024
+    );
     addFiles(selectedFiles);
   };
 
-  
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (!isDragging) setIsDragging(true);
+  };
+
+  const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (isDragging) setIsDragging(false);
+  };
+
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragging(false);
-    const droppedFiles = Array.from(event.dataTransfer.files)
-      .filter((file) => file.size <= MAX_FILE_SIZE_MB * 1024 * 1024);
+    const droppedFiles = Array.from(event.dataTransfer.files).filter(
+      (file) => file.size <= MAX_FILE_SIZE_MB * 1024 * 1024
+    );
     addFiles(droppedFiles);
   };
 
@@ -77,15 +92,11 @@ const UploadPage: React.FC = () => {
         </div>
       </div>
 
-    
       <div
         className={`upload-box ${isDragging ? "dragging" : ""}`}
-        onDragOver={(e) => {
-          e.preventDefault();
-          setIsDragging(true);
-        }}
+        onDragOver={handleDragOver}
         onDrop={handleDrop}
-        onDragLeave={() => setIsDragging(false)}
+        onDragLeave={handleDragLeave}
       >
         <div className="image-container">
           <img src={upload} alt="upload" className="absolute-image" />
@@ -99,7 +110,10 @@ const UploadPage: React.FC = () => {
           onChange={handleFileUpload}
         />
         <p>
-          <span className="click-upload" onClick={() => fileInputRef.current?.click()}>
+          <span
+            className="click-upload"
+            onClick={() => fileInputRef.current?.click()}
+          >
             Click to upload
           </span>{" "}
           or drag and drop files below
@@ -107,12 +121,15 @@ const UploadPage: React.FC = () => {
         <p>Maximum file size {MAX_FILE_SIZE_MB} MB</p>
       </div>
 
-      
       <div className="upload-progress">
         {files.map((file, index) => (
           <div className="file" key={file.name}>
             <div className="file-left">
-              <img src={frame} alt="File Thumbnail" className="file-thumbnail" />
+              <img
+                src={frame}
+                alt="File Thumbnail"
+                className="file-thumbnail"
+              />
             </div>
             <div className="file-info">
               <span className="file-name">{file.name}</span>
@@ -120,24 +137,33 @@ const UploadPage: React.FC = () => {
             </div>
             <div className="progress-container">
               <div
-                className={`progress-bar ${file.progress === 100 ? "full" : "partial"}`}
+                className={`progress-bar ${
+                  file.progress === 100 ? "full" : "partial"
+                }`}
                 style={{ width: `${file.progress}%` }}
               ></div>
               <span className="progress-percentage">{file.progress}%</span>
             </div>
-            <button className="close-btn" onClick={() => setFiles((prev) => prev.filter((_, i) => i !== index))}>
+            <button
+              className="close-btn"
+              onClick={() =>
+                setFiles((prev) => prev.filter((_, i) => i !== index))
+              }
+            >
               ✕
             </button>
           </div>
         ))}
       </div>
 
-      
       <div className="button-group">
         <button className="cancel-btn" onClick={() => setFiles([])}>
           Cancel
         </button>
-        <button className="attach-btn" onClick={() => fileInputRef.current?.click()}>
+        <button
+          className="attach-btn"
+          onClick={() => fileInputRef.current?.click()}
+        >
           Attach files
         </button>
       </div>

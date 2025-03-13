@@ -1,9 +1,9 @@
 import React, {
   useEffect,
   useState,
-  useRef,
   useMemo,
   useCallback,
+  useRef,
   memo,
 } from "react";
 import "./Table.css";
@@ -33,6 +33,45 @@ interface User {
   address: string;
 }
 
+const DropdownMenu: React.FC<{
+  userId: number;
+  isOpen: boolean;
+  toggle: () => void;
+}> = ({ userId, isOpen, toggle }) => {
+  const dropdownItems = [
+    { icon: vector, title: "View" },
+    { icon: frame, title: "Download" },
+    { icon: frame1, title: "Rename" },
+    { icon: frame2, title: "Share Link" },
+    { icon: vector1, title: "Move" },
+    { icon: lockSimple, title: "Mark Private" },
+    { icon: frame3, title: "Delete", className: "delete" },
+  ];
+
+  return (
+    <div className="menu-wrapper">
+      <img
+        src={menuButton}
+        alt="Menu Button"
+        className="menu-icon"
+        onClick={toggle}
+        aria-expanded={isOpen ? "true" : "false"}
+        role="button"
+      />
+      {isOpen && (
+        <div className="dropdown-menu">
+          {dropdownItems.map((item, i) => (
+            <div key={i} className={`dropdown-item ${item.className || ""}`}>
+              <img src={item.icon} alt={item.title} className="dropdown-icon" />
+              {item.title}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Table: React.FC<TableProps> = ({ searchQuery }) => {
   const dispatch = useDispatch();
   const characters = useSelector(
@@ -43,7 +82,6 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
 
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState<Record<number, boolean>>({});
-  const [users, setUsers] = useState<User[]>([]);
   const [view, setView] = useState<"list" | "grid">("list");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [sortDropdownOpen, setSortDropdownOpen] = useState<boolean>(false);
@@ -58,26 +96,8 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
     setDropdownOpen((prev) => ({ ...prev, [index]: !prev[index] }));
   }, []);
 
-  const filteredUsers = useMemo(() => {
-    return characters.filter((user) =>
-      user.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [characters, searchQuery]);
-
-  const dropdownItems = [
-    { icon: vector, title: "View" },
-    { icon: frame, title: "Download" },
-    { icon: frame1, title: "Rename" },
-    { icon: frame2, title: "Share Link" },
-    { icon: vector1, title: "Move" },
-    { icon: lockSimple, title: "Mark Private" },
-    { icon: frame3, title: "Delete", className: "delete" },
-  ];
-
-  const allUsers = useSelector((state: RootState) => state.starwar.characters);
-
-  const sortedFilteredUsers: any[] = useMemo(() => {
-    return [...allUsers]
+  const processedUsers = useMemo(() => {
+    return [...characters]
       .filter((user) =>
         user.name.toLowerCase().includes(searchQuery.toLowerCase())
       )
@@ -86,7 +106,7 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
           ? a.name.localeCompare(b.name)
           : b.name.localeCompare(a.name)
       );
-  }, [allUsers, searchQuery, sortOrder]);
+  }, [characters, searchQuery, sortOrder]);
 
   const handleSort = (order: "asc" | "desc") => {
     setSortOrder(order);
@@ -94,7 +114,15 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
   };
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error)
+    return (
+      <div>
+        <p>Error: {error}</p>
+        <button onClick={() => dispatch(fetchCharactersRequest())}>
+          Retry
+        </button>
+      </div>
+    );
 
   return (
     <div className="table-container">
@@ -106,6 +134,7 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
             <button
               className="sort-button"
               onClick={() => setSortDropdownOpen(!sortDropdownOpen)}
+              aria-expanded={sortDropdownOpen}
             >
               Sort
             </button>
@@ -155,8 +184,8 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
             </tr>
           </thead>
           <tbody>
-            {sortedFilteredUsers.length > 0 ? (
-              sortedFilteredUsers.map((user) => (
+            {processedUsers.length > 0 ? (
+              processedUsers.map((user) => (
                 <tr key={user.id}>
                   <td>{user.name}</td>
                   <td>{user.address}</td>
@@ -171,7 +200,7 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
         </table>
       ) : (
         <div className="grid-container">
-          {filteredUsers.map((user) => (
+          {processedUsers.map((user) => (
             <div key={user.id}>
               <div className="white-box"></div>
               <div className="grid-item">
@@ -184,31 +213,11 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
                     />
                     <span className="movie-name">{user.name}</span>
                   </div>
-                  <div ref={menuRef} className="menu-wrapper">
-                    <img
-                      src={menuButton}
-                      alt="Menu Button"
-                      className="menu-icon"
-                      onClick={() => toggleDropdown(user.id)}
-                    />
-                    {dropdownOpen[user.id] && (
-                      <div className="dropdown-menu">
-                        {dropdownItems.map((item, i) => (
-                          <div
-                            key={i}
-                            className={`dropdown-item ${item.className || ""}`}
-                          >
-                            <img
-                              src={item.icon}
-                              alt={item.title}
-                              className="dropdown-icon"
-                            />
-                            {item.title}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <DropdownMenu
+                    userId={user.id}
+                    isOpen={dropdownOpen[user.id]}
+                    toggle={() => toggleDropdown(user.id)}
+                  />
                 </div>
               </div>
             </div>
