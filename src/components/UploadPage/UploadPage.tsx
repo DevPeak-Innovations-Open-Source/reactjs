@@ -24,19 +24,16 @@ const UploadPage: React.FC = () => {
   const addFiles = (newFiles: File[]) => {
     setFiles((prevFiles) => {
       const existingNames = new Set(prevFiles.map((file) => file.name));
-
-      const filteredFiles = newFiles
-        .filter((file) => !existingNames.has(file.name))
-        .slice(0, MAX_FILES - prevFiles.length);
-
-      return [
-        ...prevFiles,
-        ...filteredFiles.map((file) => ({
-          name: file.name,
-          size: formatFileSize(file.size),
-          progress: 100,
-        })),
-      ];
+      
+      const filteredFiles = newFiles.filter((file) => !existingNames.has(file.name));
+      
+      return prevFiles.length + filteredFiles.length > MAX_FILES
+        ? prevFiles
+        : [...prevFiles, ...filteredFiles.map((file) => ({
+            name: file.name,
+            size: formatFileSize(file.size),
+            progress: 100,
+          }))];
     });
   };
 
@@ -64,10 +61,14 @@ const UploadPage: React.FC = () => {
 
       <div className="upload-progress">
         {files.length > 0 ? (
-          files.map((file, index) => (
-            <FileItem key={file.name} file={file} onRemove={() =>
-              setFiles((prev) => prev.filter((_, i) => i !== index))
-            }/>
+          files.map((file: UploadedFile, index: number) => (
+            <FileItem
+              key={file.name}
+              file={file}
+              onRemove={() =>
+                setFiles((prev) => prev.filter((_, i) => i !== index))
+              }
+            />
           ))
         ) : (
           <p className="no-files">No files uploaded.</p>
