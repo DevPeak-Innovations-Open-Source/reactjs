@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import "./Sidebar.css";
+import "./Sidebar.scss";
 import { triple, logo, fileIcon, arrowIcon } from "../../assets";
 
 interface SidebarProps {
