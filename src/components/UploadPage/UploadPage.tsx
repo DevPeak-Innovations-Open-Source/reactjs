@@ -23,13 +23,13 @@ const UploadPage: React.FC = () => {
 
   const addFiles = (newFiles: File[]) => {
     setFiles((prevFiles) => {
-      const existingNames = new Set(prevFiles.map((file) => file.name));
+      const existingNames = new Set(prevFiles.map((file:any) => file.name));
       
-      const filteredFiles = newFiles.filter((file) => !existingNames.has(file.name));
+      const filteredFiles = newFiles.filter((file:any) => !existingNames.has(file.name));
       
       return prevFiles.length + filteredFiles.length > MAX_FILES
         ? prevFiles
-        : [...prevFiles, ...filteredFiles.map((file) => ({
+        : [...prevFiles, ...filteredFiles.map((file:any) => ({
             name: file.name,
             size: formatFileSize(file.size),
             progress: 100,
