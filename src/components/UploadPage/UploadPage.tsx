@@ -21,22 +21,27 @@ const UploadPage: React.FC = () => {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const addFiles = (newFiles: File[]) => {
-    setFiles((prevFiles) => {
-      const existingNames = new Set(prevFiles.map((file:any) => file.name));
-      
-      const filteredFiles = newFiles.filter((file:any) => !existingNames.has(file.name));
-      
-      return prevFiles.length + filteredFiles.length > MAX_FILES
-        ? prevFiles
-        : [...prevFiles, ...filteredFiles.map((file:any) => ({
-            name: file.name,
-            size: formatFileSize(file.size),
-            progress: 100,
-          }))];
+  const addFiles = (newFiles: any[]): void => {
+    setFiles((prevFiles: any[]) => {
+      const existingNames = new Set(prevFiles.map((file: any) => file.name));
+  
+      const filteredFiles = newFiles.filter((file: any) => !existingNames.has(file.name));
+  
+      if (prevFiles.length + filteredFiles.length > MAX_FILES) {
+        return prevFiles;
+      }
+  
+      return [
+        ...prevFiles,
+        ...filteredFiles.map((file: any) => ({
+          name: file.name,
+          size: formatFileSize(file.size),
+          progress: 100,
+        })),
+      ];
     });
   };
-
+  
   return (
     <div className="upload-container">
       <div className="upload-header">
