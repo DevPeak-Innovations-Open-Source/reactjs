@@ -1,17 +1,15 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import "./UploadPage.css";
 import { star } from "../../assets";
 import DragDropUpload from "./DragDropUpload";
 import FileItem from "./FileItem";
+import { MAX_FILES, MAX_FILE_SIZE_MB } from "../../utils";
 
 interface UploadedFile {
   name: string;
   size: string;
   progress: number;
 }
-
-const MAX_FILES = 2;
-const MAX_FILE_SIZE_MB = 50;
 
 const formatFileSize = (size: number): string => {
   return size > 1024 * 1024
@@ -21,8 +19,9 @@ const formatFileSize = (size: number): string => {
 
 const UploadPage: React.FC = () => {
   const [files, setFiles] = useState<UploadedFile[]>([]);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const addFiles = useCallback((newFiles: File[]) => {
+  const addFiles = (newFiles: File[]) => {
     setFiles((prevFiles) => {
       const existingNames = new Set(prevFiles.map((file) => file.name));
 
@@ -39,7 +38,7 @@ const UploadPage: React.FC = () => {
         })),
       ];
     });
-  }, []);
+  };
 
   return (
     <div className="upload-container">
@@ -53,10 +52,16 @@ const UploadPage: React.FC = () => {
         </div>
       </div>
 
-     
       <DragDropUpload onFilesAdded={addFiles} maxSizeMB={MAX_FILE_SIZE_MB} />
 
-      
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        multiple
+        onChange={(e) => e.target.files && addFiles(Array.from(e.target.files))}
+      />
+
       <div className="upload-progress">
         {files.length > 0 ? (
           files.map((file, index) => (
@@ -69,10 +74,9 @@ const UploadPage: React.FC = () => {
         )}
       </div>
 
-      
       <div className="button-group">
         <button className="cancel-btn" onClick={() => setFiles([])}>Cancel</button>
-        <button className="attach-btn" onClick={() => document.querySelector<HTMLInputElement>('input[type="file"]')?.click()}>
+        <button className="attach-btn" onClick={() => fileInputRef.current?.click()}>
           Attach files
         </button>
       </div>
