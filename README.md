@@ -1,273 +1,36 @@
-# reactjs
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## React Hooks
-- useState()
-- useEffect() 
-- Try using this API call 'https://dummyjson.com/products'
-## Task for today
-- useMemo()
-- useCallback()
+## Getting Started
 
-## React Topics (Completed)
-- ReactJS definition
-- CRA Template in ReactJS
-- package.json and it's use
-- difference between react code and build code
-- difference between import and require('')
-- how to change import method from require('') to import
-- difference between .js and .jsx
+First, run the development server:
 
-## Array method writing syntax
-```
-"array variable name"."array method name"((item, index)=>{
-  console.log(item);
-})
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Array fill()
-```
-const arr = [
-  {
-    "postId": 1,
-    "id": 1,
-    "name": "id labore ex et quam laborum",
-    "email": "Eliseo@gardner.biz",
-    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
-    "hide": false
-  },
-  {
-    "postId": 1,
-    "id": 2,
-    "name": "quo vero reiciendis velit similique earum",
-    "email": "Jayne_Kuhic@sydney.com",
-    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et",
-    "hide": false
-  },
-  {
-    "postId": 1,
-    "id": 3,
-    "name": "odio adipisci rerum aut animi",
-    "email": "Nikita@garfield.biz",
-    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
-    "hide": false
-  },
-]
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-const num = [1,2,3]
-const str = ["1,2,3", "Simran", "Dhanur"]
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-console.log(arr.fill({"postId": "2"}, 2));
+## Learn More
 
+To learn more about Next.js, take a look at the following resources:
 
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### Array some()
+## Deploy on Vercel
 
-```
-const arr = [
-  {
-    "postId": 1,
-    "id": 1,
-    "name": "id labore ex et quam laborum",
-    "email": "Eliseo@gardner.biz",
-    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
-    "hide": false
-  },
-  {
-    "postId": 1,
-    "id": 2,
-    "name": "quo vero reiciendis velit similique earum",
-    "email": "Jayne_Kuhic@sydney.com",
-    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et",
-    "hide": false
-  },
-  {
-    "postId": 1,
-    "id": 3,
-    "name": "odio adipisci rerum aut animi",
-    "email": "Nikita@garfield.biz",
-    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
-    "hide": false
-  },
-]
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-const num = [1,2,3]
-const str = ["1,2,3", "Simran", "Dhanur"]
-
-console.log(arr.some((item, index)=> item.id > 3));
-
-
-
-```
-
-### Array sort()
-
-```
-const str = ["Simran", "1,2,3", "Dhanur"]
-
-console.log(str.sort());
-
-```
-
-### Array sort in case of Array of Objects 
-
-```
-const arr = [
-  {
-    "postId": 1,
-    "id": 1,
-    "name": "id labore ex et quam laborum",
-    "email": "Eliseo@gardner.biz",
-    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
-    "hide": false
-  },
-  {
-    "postId": 1,
-    "id": 2,
-    "name": "quo vero reiciendis velit similique earum",
-    "email": "Jayne_Kuhic@sydney.com",
-    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et",
-    "hide": false
-  },
-  {
-    "postId": 1,
-    "id": 3,
-    "name": "odio adipisci rerum aut animi",
-    "email": "Nikita@garfield.biz",
-    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
-    "hide": false
-  },
-]
-
-console.log(arr.sort((a, b)=>{
-  if(a.name < b.name) {
-    return -1;
-  } else if(a.name > b.name) {
-    return 1;
-  }
-}));
-
-
-
-```
-
-
-### Recursive function
-- Calling of a function by itself but under a condition so it won't go under a infinite loop.
-
-### - For example
-
-```
-const arr = [
-  {
-    "postId": 1,
-    "id": 1,
-    "name": "id labore ex et quam laborum",
-    "email": "Eliseo@gardner.biz",
-    "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium",
-    "hide": false
-  },
-  {
-    "postId": 1,
-    "id": 2,
-    "name": "quo vero reiciendis velit similique earum",
-    "email": "Jayne_Kuhic@sydney.com",
-    "body": "est natus enim nihil est dolore omnis voluptatem numquam\net omnis occaecati quod ullam at\nvoluptatem error expedita pariatur\nnihil sint nostrum voluptatem reiciendis et",
-    "subarray": [
-      {
-        "postId": 1,
-        "id": 3,
-        "name": "odio adipisci rerum aut animi",
-        "email": "Nikita@garfield.biz",
-        "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
-        "subarray": [
-          {
-            "postId": 1,
-            "id": 3,
-            "name": "odio adipisci rerum aut animi",
-            "email": "Nikita@garfield.biz",
-            "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
-            "hide": false
-          },
-        ]
-      },
-    ]
-  },
-  {
-    "postId": 1,
-    "id": 3,
-    "name": "odio adipisci rerum aut animi",
-    "email": "Nikita@garfield.biz",
-    "body": "quia molestiae reprehenderit quasi aspernatur\naut expedita occaecati aliquam eveniet laudantium\nomnis quibusdam delectus saepe quia accusamus maiores nam est\ncum et ducimus et vero voluptates excepturi deleniti ratione",
-    "hide": false
-  },
-]
-
-const renderNested = (item, index) => {
-
-  const renderSubArray = (subitem, subindex) => {
-    return renderNested(subitem, subindex)
-  }
-
-  console.log({
-    ...item,
-    arr: item?.subarray?.map(renderSubArray)
-  });
-  
-}
-
-console.log(arr.map(renderNested));
-
-
-```
-### Recursion another example 
-
-```
-const newData = [
-        {
-            "userId": 1,
-            "id": 1,
-            "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-            "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-        },
-        {
-            "userId": 1,
-            "id": 2,
-            "title": "qui est esse",
-            "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
-            'subArray': [
-                {
-                    "userId": 1,
-                    "id": 1,
-                    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-                    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-                },
-                {
-                    "userId": 1,
-                    "id": 1,
-                    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-                    "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-                },
-            ]
-        },
-        {
-            "userId": 1,
-            "id": 3,
-            "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
-            "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
-        }
-    ]
-
-    const printdata = (item, index) => {
-        console.log(item);
-        if(item.subArray) {
-            item?.subArray?.forEach(printdata)
-        }
-    }
-
-    newData.forEach(printdata)
-```
-
-##
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
