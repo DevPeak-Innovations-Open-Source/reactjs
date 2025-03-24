@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo, memo } from "react";
-import "./Table.css";
+import "./Table.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCharactersRequest } from "../../store/slices/starwarSlice";
 import { RootState } from "../../store/store";
@@ -7,16 +7,15 @@ import { listIcon1, listIcon2, filmsImage } from "../../assets";
 import DropdownMenu from "./DropdownMenu";
 import ViewToggleButton from "./ViewToggleButton";
 import SortDropdown from "./SortDropdown";
+import { useSearch } from "../../context/SearchContext";
 
-interface TableProps {
-  searchQuery: string;
-}
-
-const Table: React.FC<TableProps> = ({ searchQuery }) => {
+const Table: React.FC = () => {
   const dispatch = useDispatch();
   const characters = useSelector((state: RootState) => state.starwar.characters);
   const loading = useSelector((state: RootState) => state.starwar.loading);
   const error = useSelector((state: RootState) => state.starwar.error);
+  
+  const { searchQuery } = useSearch(); 
 
   const [dropdownOpen, setDropdownOpen] = useState<Record<number, boolean>>({});
   const [view, setView] = useState<"list" | "grid">("list");
@@ -30,9 +29,9 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
 
   const processedUsers = useMemo(() => {
     return characters
-      .filter((user) => user.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      .filter((user) => user.name.toLowerCase().includes(searchQuery.toLowerCase())) 
       .sort((a, b) => (sortOrder === "asc" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)));
-  }, [characters, searchQuery, sortOrder]);
+  }, [characters, searchQuery, sortOrder]); 
 
   const toggleDropdown = (userId: number) => {
     setDropdownOpen((prev) => ({ ...prev, [userId]: !prev[userId] }));
@@ -52,15 +51,11 @@ const Table: React.FC<TableProps> = ({ searchQuery }) => {
         <div className="table-heading">Users</div>
 
         <div className="header-controls">
-         
           <SortDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
-
-         
           <ViewToggleButton view={view} setView={setView} />
         </div>
       </div>
 
-      
       {view === "list" ? (
         <table>
           <thead>

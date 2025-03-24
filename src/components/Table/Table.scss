@@ -1,0 +1,205 @@
+// Variables for colors and fonts
+$primary-color: #03123d;
+$secondary-color: #1e293b;
+$text-color: white;
+$border-color: #334155;
+$font-family: "Inter", sans-serif;
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.table-container {
+  padding: 10px;
+  background-color: $primary-color;
+  color: $text-color;
+  font-family: $font-family;
+
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 50px;
+
+    .table-heading {
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding-top: 70px;
+      padding-right: 90px;
+    }
+  }
+}
+
+// Toggle Button
+.toggle-button {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  color: #000;
+  background: linear-gradient(to right, #03123d 30%, white 30%);
+  padding: 4px 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid white;
+
+  &:hover {
+    background-color: #334155;
+  }
+
+  .toggle-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+// Table Styles
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid $border-color;
+    padding: 10px;
+    font-family: $font-family;
+  }
+
+  th {
+    background-color: $secondary-color;
+  }
+}
+
+// List View
+.list-text {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 8px;
+}
+
+// Grid View
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 20px;
+  gap: 15px;
+
+  .grid-item {
+    background-color: rgba(249, 250, 253, 0.2);
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+
+    .white-box {
+      background-color: white;
+      padding: 30px;
+      border-radius: 5px;
+      height: 100px;
+      margin-bottom: 5px;
+    }
+
+    .movie-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+
+      .movie-name-container {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .movie-image {
+          width: 20px;
+          height: 20px;
+        }
+
+        .movie-name {
+          font-weight: bold;
+          font-size: 14px;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+}
+
+// Dropdown Menu
+.menu-wrapper {
+  position: relative;
+
+  .dropdown-menu {
+    position: absolute;
+    top: 30px;
+    right: -65px;
+    background: white;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 160px;
+    padding: 10px 0;
+    z-index: 100;
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:hover {
+        background: #f3f4f6;
+      }
+
+      &.delete {
+        color: red;
+      }
+    }
+  }
+}
+
+// Sort Dropdown
+.header-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.sort-container {
+  position: relative;
+
+  .sort-button {
+    padding: 8px 12px;
+    cursor: pointer;
+    width: 100%;
+    background-color: $secondary-color;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    transform: translateX(-30%);
+  }
+
+  .sort-dropdown {
+    position: absolute;
+    top: 42px;
+    right: 0px;
+    z-index: 1;
+    background: white;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 150px;
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+      width: 80%;
+    }
+  }
+}

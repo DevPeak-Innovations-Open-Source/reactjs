@@ -1,6 +1,6 @@
 import React from "react";
 import { listIcon1, listIcon2 } from "../../assets";
-import "./Table.css";
+import "./Table.scss";
 interface ViewToggleButtonProps {
   view: "list" | "grid";
   setView: (view: "list" | "grid") => void;

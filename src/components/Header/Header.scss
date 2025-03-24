@@ -1,0 +1,43 @@
+$primary-color: #03123b;
+$text-color: white;
+$border-radius: 5px;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: $primary-color;
+  color: $text-color;
+
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    
+    .search-box {
+      padding: 8px 35px;
+      width: 150px;
+      background-color: $primary-color;
+      color: $text-color;
+      border: 1px solid $text-color;
+      border-radius: $border-radius;
+      outline: none;
+      transition: width 0.3s ease-in-out;
+
+      
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      color: $text-color;
+    }
+  }
+  
+  .search-input {
+    caret-color: $text-color;
+    color: $text-color;
+  }
+}

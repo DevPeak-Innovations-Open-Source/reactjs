@@ -1,6 +1,6 @@
 import React from "react";
 import { menuButton, vector, frame, frame1, frame2, vector1, lockSimple, frame3 } from "../../assets";
-import "./Table.css";
+import "./Table.scss";
 interface DropdownMenuProps {
   userId: number;
   isOpen: boolean;

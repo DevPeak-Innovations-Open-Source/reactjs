@@ -17,12 +17,12 @@
 .menu-item-area {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 90%;
   padding: 15px;
   background-color: transparent;
   transition: background-color 0.3s ease;
   position: relative;
-  left: -30px;
+  left: -10px;
 }
 
 .menu-btn {
@@ -59,23 +59,18 @@
       display: block !important;
     }
 
-    .arrow-icon {
-      display: none;
-    }
-
-    .sidebar-logo {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .subtitle {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
+    .arrow-icon,
+    .sidebar-logo,
+    .subtitle,
+    .sidebar-menu .title,
     .sidebar-menu li {
-      pointer-events: none;
+      display: none !important;
+    }
+
+    .file-icon {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
     }
 
     .menu-item-area.active {
@@ -172,6 +167,7 @@
 .sidebar-menu a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.3s ease;
 
   &:visited {
     color: inherit;
@@ -208,6 +204,7 @@ button {
 }
 
 .submenu-item .menu-item-area {
+  width: 100%;
   background-color: #3a3f58;
   padding: 8px;
   border-radius: 5px;
